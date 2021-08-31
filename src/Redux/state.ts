@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {renderTree} from "../render";
 
 
 export type postsType = {
@@ -17,6 +18,7 @@ export type messagesType = {
 }
 export type pageMyPostType = {
     posts: Array<postsType>
+    newMyPost: string
 }
 
 export type pageDialogsType = {
@@ -32,6 +34,21 @@ export type stateType = {
 export type typeType = {
     state: stateType
 }
+export type AppType = {
+    state: stateType
+    updateNewMyPost: (newText: string) => void
+    addNewMyPost: () => void
+}
+
+export type ProfileMyPostType = {
+    posts: Array<postsType>
+    newMyPost: string
+    updateNewMyPost: (newText: string) => void
+    addNewMyPost: () => void
+}
+
+
+
 
 let state: stateType = {
     pageMyPost: {
@@ -39,9 +56,9 @@ let state: stateType = {
             {id: v1(), message: "I live in Astana", like: "5"},
             {id: v1(), message: "Yo Yo Yo", like: "50"},
             {id: v1(), message: "KazAgro", like: "15"},
+        ],
+        newMyPost : '',
 
-
-        ]
     },
     pageDialogs: {
         dialogs: [
@@ -60,5 +77,20 @@ let state: stateType = {
         ],
     }
 }
+export let addNewMyPost = () => {
+    let newMYPostForm : postsType = {id: v1(), message: state.pageMyPost.newMyPost, like: "0"}
+    state.pageMyPost.posts.push(newMYPostForm)
+    state.pageMyPost.newMyPost = ''
+    renderTree()
+}
+
+export let updateNewMyPost = (newText: string) => {
+    state.pageMyPost.newMyPost = newText
+    renderTree()
+
+}
+
+
+
 
 export default state;
