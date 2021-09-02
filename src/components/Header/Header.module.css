@@ -1,8 +1,22 @@
 .header {
     grid-area: h;
-    background-color: green;
+    background-color: #24272C;
+    border-radius: 5px;
 }
-.header img {
-    width: 40px;
-    padding: 10px 10px;
+
+
+.header_text {
+    color: white;
+    margin-left: 30px;
+    font-weight: bold;
+    font-size: 40px;
+
+}
+
+.header_text:after{
+    content: '\003E';
+}
+
+.header_text:before{
+    content: '\003C';
 }

@@ -4,7 +4,7 @@ import g from "./ProfileInfo.module.css"
 
 const ProfileInfo = () => {
     return (
-        <div>
+        <div className={g.propfile_info_style}>
             <div>
                 <img src={linkProfile}/>
             </div>

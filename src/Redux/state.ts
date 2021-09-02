@@ -1,6 +1,12 @@
 import {v1} from "uuid";
-import {renderTree} from "../render";
 
+let renderApp = () => {
+    console.log("11")
+}
+
+export const subscribe = (callback: () => void) => {
+    renderApp = callback
+}
 
 export type postsType = {
     id: string
@@ -81,12 +87,12 @@ export let addNewMyPost = () => {
     let newMYPostForm : postsType = {id: v1(), message: state.pageMyPost.newMyPost, like: "0"}
     state.pageMyPost.posts.push(newMYPostForm)
     state.pageMyPost.newMyPost = ''
-    renderTree()
+    renderApp()
 }
 
 export let updateNewMyPost = (newText: string) => {
     state.pageMyPost.newMyPost = newText
-    renderTree()
+    renderApp()
 
 }
 
