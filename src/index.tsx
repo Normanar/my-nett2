@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state, {updateNewMyPost, addNewMyPost, subscribe} from "./Redux/state";
+import {store} from "./Redux/state";
 
 
 export const renderTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state} updateNewMyPost={updateNewMyPost} addNewMyPost={addNewMyPost}/>
+            <App store={store} />
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 renderTree()
-subscribe(renderTree)
+store.subscribe(renderTree)
 
 // ReactDOM.render(
 //     <React.StrictMode>

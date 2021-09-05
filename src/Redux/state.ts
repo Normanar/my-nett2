@@ -1,12 +1,5 @@
 import {v1} from "uuid";
 
-let renderApp = () => {
-    console.log("11")
-}
-
-export const subscribe = (callback: () => void) => {
-    renderApp = callback
-}
 
 export type postsType = {
     id: string
@@ -40,11 +33,6 @@ export type stateType = {
 export type typeType = {
     state: stateType
 }
-export type AppType = {
-    state: stateType
-    updateNewMyPost: (newText: string) => void
-    addNewMyPost: () => void
-}
 
 export type ProfileMyPostType = {
     posts: Array<postsType>
@@ -53,50 +41,63 @@ export type ProfileMyPostType = {
     addNewMyPost: () => void
 }
 
+export type StoreType = {
+    _state: stateType
+    _renderApp: () => void
+    subscribe: (callback: () => void) => void
+    addNewMyPost: () => void
+    updateNewMyPost: (newText: string) => void
+    getState: () => stateType
+}
 
 
+export const store: StoreType = {
+    _state: {
+        pageMyPost: {
+            posts: [
+                {id: v1(), message: "I live in Astana", like: "5"},
+                {id: v1(), message: "Yo Yo Yo", like: "50"},
+                {id: v1(), message: "KazAgro", like: "15"},
+            ],
+            newMyPost: '',
 
-let state: stateType = {
-    pageMyPost: {
-        posts: [
-            {id: v1(), message: "I live in Astana", like: "5"},
-            {id: v1(), message: "Yo Yo Yo", like: "50"},
-            {id: v1(), message: "KazAgro", like: "15"},
-        ],
-        newMyPost : '',
+        },
+        pageDialogs: {
+            dialogs: [
+                {id: v1(), name: "Nick"},
+                {id: v1(), name: "John"},
+                {id: v1(), name: "Nicole"},
+                {id: v1(), name: "Paul"},
 
+            ],
+            messages: [
+                {id: v1(), message: "Hi ! Hi !"},
+                {id: v1(), message: "What are you doing?"},
+                {id: v1(), message: "React! React! React! React! React! "},
+                {id: v1(), message: "Yo Yo Yo"},
+
+            ],
+        }
     },
-    pageDialogs: {
-        dialogs: [
-            {id: v1(), name: "Nick"},
-            {id: v1(), name: "John"},
-            {id: v1(), name: "Nicole"},
-            {id: v1(), name: "Paul"},
-
-        ],
-        messages: [
-            {id: v1(), message: "Hi ! Hi !"},
-            {id: v1(), message: "What are you doing?"},
-            {id: v1(), message: "React! React! React! React! React! "},
-            {id: v1(), message: "Yo Yo Yo"},
-
-        ],
+    _renderApp() {
+        console.log("11")
+    },
+    subscribe(callback) { /*callback прописан в типизации поэтому здесь его можно не прописывать*/
+        this._renderApp = callback
+    },
+    addNewMyPost() {
+        let newMYPostForm: postsType = {id: v1(), message: this._state.pageMyPost.newMyPost, like: "0"}
+        this._state.pageMyPost.posts.push(newMYPostForm)
+        this._state.pageMyPost.newMyPost = ''
+        this._renderApp()
+    },
+    updateNewMyPost(newText: string) {
+        this._state.pageMyPost.newMyPost = newText
+        this._renderApp()
+    },
+    getState() {
+        return this._state
     }
-}
-export let addNewMyPost = () => {
-    let newMYPostForm : postsType = {id: v1(), message: state.pageMyPost.newMyPost, like: "0"}
-    state.pageMyPost.posts.push(newMYPostForm)
-    state.pageMyPost.newMyPost = ''
-    renderApp()
-}
-
-export let updateNewMyPost = (newText: string) => {
-    state.pageMyPost.newMyPost = newText
-    renderApp()
-
-}
+};
 
 
-
-
-export default state;
