@@ -1,23 +1,23 @@
 import g from "./MyPosts.module.css";
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import Post from "./Post/Post";
-import {ProfileMyPostType} from "../../../Redux/state";
+import {addNewMyPostAC, ProfileMyPostType, updateNewMyPostAC} from "../../../Redux/state";
 
 
 const MyPosts: React.FC<ProfileMyPostType> = (props) => {
-
+    debugger
 
     const onClickHandler = () => {
-        props.addNewMyPost()
+        props.dispatch(addNewMyPostAC())
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMyPost(event.currentTarget.value)
+        props.dispatch(updateNewMyPostAC(event.currentTarget.value))
     }
 
     const onKeyPressEnter = (event : KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === "Enter") {
-            props.addNewMyPost()
+            props.dispatch(addNewMyPostAC())
         }
     }
 

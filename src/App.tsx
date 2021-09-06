@@ -24,12 +24,14 @@ function App(props: AppType) {
                     <Route
                         path={"/messages"} render={() => <Dialogs
                         dialogs={state.pageDialogs.dialogs}
-                        messages={state.pageDialogs.messages}/>}/>
+                        messages={state.pageDialogs.messages}
+                        newMessage={state.pageDialogs.newMessage}
+                        dispatch={props.store.dispatch.bind(props.store)}/>}
+                    />
                     <Route path={"/profile"} render={() => <Profile
                         posts={state.pageMyPost.posts}
                         newMyPost={state.pageMyPost.newMyPost}
-                        updateNewMyPost={props.store.updateNewMyPost.bind(props.store)}
-                        addNewMyPost={props.store.addNewMyPost.bind(props.store)}
+                        dispatch={props.store.dispatch.bind(props.store)}
                     />}/>
                 </div>
             </div>

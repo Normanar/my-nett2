@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import { profileReducer } from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 
 
 export type postsType = {
@@ -23,6 +25,8 @@ export type pageMyPostType = {
 export type pageDialogsType = {
     dialogs: Array<dialogsType>
     messages: Array<messagesType>
+    newMessage: string
+
 }
 
 export type stateType = {
@@ -37,8 +41,15 @@ export type typeType = {
 export type ProfileMyPostType = {
     posts: Array<postsType>
     newMyPost: string
-    updateNewMyPost: (newText: string) => void
-    addNewMyPost: () => void
+    dispatch: (action: AllActionsType) => void
+}
+
+export type DialogsType = {
+    dialogs: Array<dialogsType>
+    messages: Array<messagesType>
+    newMessage: string
+    dispatch: (action: AllActionsType) => void
+
 }
 
 export type StoreType = {
@@ -48,16 +59,54 @@ export type StoreType = {
     addNewMyPost: () => void
     updateNewMyPost: (newText: string) => void
     getState: () => stateType
+    dispatch: (action: any) => void
 }
+
+export const addNewMyPostAC = () => {
+    return {
+        type : 'ADD-NEW-MY-POST'
+    } as const
+}
+
+export const updateNewMyPostAC = (newText: string) => {
+    return {
+        type : 'UPDATE-NEW-MY-POST',
+        newText: newText,
+    } as const
+}
+
+export const addNewMessageAC = () => {
+    return {
+        type : 'ADD-NEW-MESSAGE'
+    } as const
+}
+
+export const updateNewMessageAC = (newMessage: string) => {
+    return {
+        type : 'UPDATE-NEW-MESSAGE',
+        newMessage: newMessage,
+    } as const
+}
+
+
+
+
+
+
+export type AllActionsType = ReturnType<typeof addNewMyPostAC> |
+    ReturnType<typeof updateNewMyPostAC> |
+    ReturnType<typeof addNewMessageAC> |
+    ReturnType<typeof updateNewMessageAC>
+
 
 
 export const store: StoreType = {
     _state: {
         pageMyPost: {
             posts: [
-                {id: v1(), message: "I live in Astana", like: "5"},
+                {id: v1(), message: "I live in LA", like: "5"},
                 {id: v1(), message: "Yo Yo Yo", like: "50"},
-                {id: v1(), message: "KazAgro", like: "15"},
+                {id: v1(), message: "London is the capital and largest city of England and the United Kingdom.", like: "15"},
             ],
             newMyPost: '',
 
@@ -75,8 +124,8 @@ export const store: StoreType = {
                 {id: v1(), message: "What are you doing?"},
                 {id: v1(), message: "React! React! React! React! React! "},
                 {id: v1(), message: "Yo Yo Yo"},
-
             ],
+            newMessage: '',
         }
     },
     _renderApp() {
@@ -97,7 +146,15 @@ export const store: StoreType = {
     },
     getState() {
         return this._state
-    }
+    },
+    dispatch(action) {
+        this._state.pageMyPost = profileReducer(this._state.pageMyPost, action)
+        this._state.pageDialogs = dialogsReducer(this._state.pageDialogs, action)
+        this._renderApp()
+
+    },
 };
+
+console.log(store._state.pageMyPost.newMyPost)
 
 

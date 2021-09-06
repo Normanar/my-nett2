@@ -1,12 +1,24 @@
-import React from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import g from "./Dialogs.module.css"
 import DialogUser from "./DialogUser/DialogUser";
 import MessageOne from "./DialogUser/MessageOne";
-import {pageDialogsType} from "../../Redux/state";
+import {addNewMessageAC, addNewMyPostAC, DialogsType, updateNewMessageAC} from "../../Redux/state";
 
-const Dialogs = (props: pageDialogsType) => {
-    let newPostRef = React.useRef<HTMLTextAreaElement>(null);
-    const AddPost = () => newPostRef.current ? alert(newPostRef.current.value) : alert("11111")
+const Dialogs = (props: DialogsType) => {
+
+    const onChangeNewMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(updateNewMessageAC(event.currentTarget.value))
+    }
+    const onClickAddNewMessage = () => {
+        props.dispatch(addNewMessageAC())
+    }
+
+    const onKeyPressEnter = (event : KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.key === "Enter") {
+            props.dispatch(addNewMessageAC())
+        }
+    }
+
 
     return (
         <div className={g.dialogs}>
@@ -15,8 +27,11 @@ const Dialogs = (props: pageDialogsType) => {
             </div>
             <div className={g.dialogsMessageAll}>
                 {props.messages.map(t => <MessageOne message={t.message}/>)}
-                <textarea ref={newPostRef}></textarea>
-                <button onClick={AddPost}>Add</button>
+                <textarea value={props.newMessage}
+                          onChange={onChangeNewMessage}
+                          onKeyPress={onKeyPressEnter}
+                ></textarea>
+                <button onClick={onClickAddNewMessage}>Add</button>
             </div>
         </div>
     )
