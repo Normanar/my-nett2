@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import g from "./Dialogs.module.css"
 import DialogUser from "./DialogUser/DialogUser";
 import MessageOne from "./DialogUser/MessageOne";
-import {addNewMessageAC, addNewMyPostAC, DialogsType, updateNewMessageAC} from "../../Redux/state";
+import {addNewMessageAC, addNewMyPostAC, DialogsType, updateNewMessageAC} from "../../Redux/store";
 
 const Dialogs = (props: DialogsType) => {
 

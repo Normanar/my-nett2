@@ -1,7 +1,7 @@
 import g from "./MyPosts.module.css";
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import Post from "./Post/Post";
-import {addNewMyPostAC, ProfileMyPostType, updateNewMyPostAC} from "../../../Redux/state";
+import {addNewMyPostAC, ProfileMyPostType, updateNewMyPostAC} from "../../../Redux/store";
 
 
 const MyPosts: React.FC<ProfileMyPostType> = (props) => {

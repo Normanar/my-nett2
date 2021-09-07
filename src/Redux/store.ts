@@ -59,7 +59,7 @@ export type StoreType = {
     addNewMyPost: () => void
     updateNewMyPost: (newText: string) => void
     getState: () => stateType
-    dispatch: (action: any) => void
+    dispatch: (action: AllActionsType) => void
 }
 
 export const addNewMyPostAC = () => {
