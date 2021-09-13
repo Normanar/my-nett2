@@ -1,17 +1,19 @@
 import React from "react";
 import g from './Profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ProfileMyPostType} from "../../Redux/store";
+import {StoreReduxType} from "../../Redux/redux-store";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile: React.FC<ProfileMyPostType> = (props) => {
+type ProfileType = {
+    store: StoreReduxType
+}
+
+
+const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div className={g.content}>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}
-                     newMyPost={props.newMyPost}
-                     dispatch={props.dispatch}
-            />
+            <MyPostsContainer store={props.store}/>
         </div>
     )
 }

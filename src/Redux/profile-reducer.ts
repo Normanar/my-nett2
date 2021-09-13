@@ -3,8 +3,8 @@ import {AllActionsType, postsType} from "./store";
 
 let initialState = {
         posts: [
-            {id: v1(), message: "I live in LA", like: "5"},
-            {id: v1(), message: "Yo Yo Yo", like: "50"},
+            {id: v1(), message: "Have you tried turning it off and on again?", like: "5"},
+            {id: v1(), message: "Didn't know what a stress machine as this morning, and now we have two of them.", like: "50"},
             {id: v1(), message: "London is the capital and largest city of England and the United Kingdom.", like: "15"},
         ],
         newMyPost: '',

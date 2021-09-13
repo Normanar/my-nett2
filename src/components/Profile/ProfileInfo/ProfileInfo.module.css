@@ -1,10 +1,42 @@
 .profileInfoDescription {
     padding: 10px;
+    color: #076071;
+    font-size: 17px;
+    font-weight: bold;
+    display: flex;
 
 }
 
-.propfile_info_style{
-    background-color: #1698AE;
+.profile_info_style{
+    background-color: #BFBFBD;
+    /*#BFBFBD
+    #1698AE
+    */
     border-radius: 5px;
+
+}
+
+.profileAvatar img {
+    height: 100px;
+    width: 100px;
+}
+
+.profileDescription{
+    padding-left: 20px;
+}
+
+.linkProfile {
+    overflow:hidden; /* this is important */
+    position:relative; /* this is important too */
+    border:1px solid #ccc;
+    width:1050px;
+    height:130px;
+    border-radius: 5px;
+}
+
+.linkProfile img {
+    position:absolute;
+    top:-140px;
+    left:-290px;
 
 }

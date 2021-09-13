@@ -2,20 +2,37 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import g from "./Dialogs.module.css"
 import DialogUser from "./DialogUser/DialogUser";
 import MessageOne from "./DialogUser/MessageOne";
-import {addNewMessageAC, addNewMyPostAC, DialogsType, updateNewMessageAC} from "../../Redux/store";
 
-const Dialogs = (props: DialogsType) => {
+type OneDialogType = {
+    id: string
+    name: string
+}
+type OneMessageType = {
+    id: string
+    message: string
+}
+
+type DialogsType = {
+    dialogs: Array<OneDialogType>
+    messages: Array<OneMessageType>
+    newMessage: string
+    updateNewMessage: (text: string) => void
+    addNewMessage: () => void
+}
+
+
+const Dialogs: React.FC<DialogsType> = (props) => {
 
     const onChangeNewMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageAC(event.currentTarget.value))
+        props.updateNewMessage(event.currentTarget.value)
     }
     const onClickAddNewMessage = () => {
-        props.dispatch(addNewMessageAC())
+        props.addNewMessage()
     }
 
     const onKeyPressEnter = (event : KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === "Enter") {
-            props.dispatch(addNewMessageAC())
+            props.addNewMessage()
         }
     }
 

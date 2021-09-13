@@ -8,7 +8,7 @@ export type postsType = {
     message: string
     like: string
 }
-export type dialogsType = {
+type dialogsType = {
     id: string
     name: string
 }

@@ -43,7 +43,7 @@
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
     border-bottom: 20px solid white;
-    top: 70%;
+    top: 67%;
     left: -20px;
     z-index: 1;
 
@@ -53,7 +53,7 @@
     display: flex;
     justify-content: end;
     color: #1698AE;
-    font-size: 15px;
+    font-size: 12px;
     margin-top: 5px;
 
 }
@@ -65,8 +65,8 @@
 }
 
 .heart{
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background-color: red;
     transform: rotate(45deg);
     position: relative;
@@ -79,18 +79,18 @@
 .heart::after{
     content : '';
     display: block;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background-color: red;
     border-radius: 50%;
     position: absolute;
 }
 .heart::before {
-    top: -5px;
+    top: -4px;
     left: 0;
 }
 
 .heart::after {
     top: 0;
-    left: -5px;
+    left: -4px;
 }
