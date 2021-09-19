@@ -1,7 +1,8 @@
 import g from "./Post.module.css";
 import React from "react";
 import {linkPost} from "../../../Link/Links"
-import {postsType} from "../../../../Redux/store";
+import {postsType} from "../MyPosts";
+
 
 
 // const Post: React.FC<postsType> = (props) => {

@@ -1,0 +1,45 @@
+.users {
+
+    color: black;
+
+}
+
+.user_avatar{
+
+}
+
+.user_avatar img{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 2px #076071 solid;
+    background-color: white;
+    margin-left: 7px;
+}
+
+.one_user {
+    border: 2px #BFBFBD solid;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: #BFBFBD;
+    padding: 5px;
+    display: flex;
+}
+
+.user_name_and_status{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.user_name_text:after{
+    content: '\003E';
+}
+
+.user_name_text:before{
+    content: '\003C';
+}
+.button_user_follow_unfollow{
+    width: 90px;
+}

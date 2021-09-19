@@ -1,8 +1,25 @@
 import {v1} from "uuid";
 import {AllActionsType} from "./store";
 
+type dialogType = {
+    id: string
+    name: string
+}
 
-let initialState = {
+type messageType = {
+    id: string
+    message: string
+}
+
+export type InitialStateType = {
+    dialogs: Array<dialogType>
+    messages: Array<messageType>
+    newMessage: string
+}
+
+
+
+let initialState: InitialStateType = {
     dialogs: [
         {id: v1(), name: "Nick"},
         {id: v1(), name: "John"},
@@ -20,16 +37,24 @@ let initialState = {
 }
 
 
-export const dialogsReducer = (state = initialState, action: AllActionsType) => {
+export const dialogsReducer = (state = initialState, action: AllActionsType) : InitialStateType => {
     switch (action.type) {
         case 'ADD-NEW-MESSAGE':
-            let newCurrentMessage = {id: v1(), message: state.newMessage}
-            state.messages.push(newCurrentMessage)
-            state.newMessage = ''
-            return state;
+            // let newCurrentMessage = {id: v1(), message: state.newMessage}
+            // state.messages.push(newCurrentMessage)
+            // state.newMessage = ''
+            // return state;
+            return {
+                ...state,
+                messages: [...state.messages, {id: v1(), message: state.newMessage}],
+                newMessage: ''
+            }
+
         case 'UPDATE-NEW-MESSAGE':
-            state.newMessage = action.newMessage
-            return state;
+            return {
+                ...state,
+                newMessage: action.newMessage
+            }
         default:
             return state;
     }

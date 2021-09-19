@@ -1,7 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import g from './Navbar.module.css'
-
 
 const Navbar = () => {
     return (
@@ -11,6 +10,9 @@ const Navbar = () => {
             </div>
             <div>
                 <NavLink to="/messages" activeClassName={g.activeLink}>Messages</NavLink>
+            </div>
+            <div>
+                <NavLink to="/users" activeClassName={g.activeLink}>Users</NavLink>
             </div>
             <div>
                 <NavLink to="/news" activeClassName={g.activeLink}>News</NavLink>

@@ -3,7 +3,7 @@ import { profileReducer } from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 
 
-export type postsType = {
+type postsType = {
     id: string
     message: string
     like: string
@@ -13,11 +13,11 @@ type dialogsType = {
     name: string
 }
 
-export type messagesType = {
+type messagesType = {
     id: string
     message: string
 }
-export type pageMyPostType = {
+type pageMyPostType = {
     posts: Array<postsType>
     newMyPost: string
 }
@@ -52,7 +52,7 @@ export type DialogsType = {
 
 }
 
-export type StoreType = {
+type StoreType = {
     _state: stateType
     _renderApp: () => void
     subscribe: (callback: () => void) => void

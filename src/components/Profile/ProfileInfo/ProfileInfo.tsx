@@ -13,9 +13,10 @@ const ProfileInfo = () => {
                     <img alt={"avatar"} src={linkAvatar}/>
                 </div>
                 <div className={g.profileDescription}>
-                    <div>Имя: Рой Треннеман</div>
-                    <div>Место работы: Рейнхолм Индастриз</div>
-                    <div>Интересы: комиксы, компьютерные игры</div>
+                    <div>Name: Roy Trenneman</div>
+                    <div>Occupation: Support technician for Reynholm Industries</div>
+                    <div>Department: IT Department</div>
+                    <div>Eye colour: Blue</div>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@ import g from "./MyPosts.module.css";
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import Post from "./Post/Post";
 
-type postsType = {
+export type postsType = {
     id: string
     message: string
     like: string
