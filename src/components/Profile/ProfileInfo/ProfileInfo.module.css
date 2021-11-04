@@ -29,7 +29,7 @@
     overflow:hidden; /* this is important */
     position:relative; /* this is important too */
     border:1px solid #ccc;
-    width:1050px;
+    width: 100%;
     height:130px;
     border-radius: 5px;
 }
@@ -37,6 +37,6 @@
 .linkProfile img {
     position:absolute;
     top:-140px;
-    left:-290px;
+    left:-330px;
 
 }

@@ -17,30 +17,7 @@ export type initialStateType = {
 }
 
 let initialState: initialStateType = {
-    items: [
-        // {
-        //     "name": "Marmelles",
-        //     "id": 19706,
-        //     "uniqueUrlName": null,
-        //     "photos": {
-        //         "small": "https://social-network.samuraijs.com/activecontent/images/users/19706/user-small.jpg?v=1",
-        //         "large": "https://social-network.samuraijs.com/activecontent/images/users/19706/user.jpg?v=1"
-        //     },
-        //     "status": "Marmel112",
-        //     "followed": false
-        // },
-        // {
-        //     "name": "ascc12456ddssasdasd",
-        //     "id": 19701,
-        //     "uniqueUrlName": null,
-        //     "photos": {
-        //         "small": null,
-        //         "large": null
-        //     },
-        //     "status": null,
-        //     "followed": true
-        // },
-    ]
+    items: [ ]
 }
 
 type AllActionType = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUsersAC>

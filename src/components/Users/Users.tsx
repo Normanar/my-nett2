@@ -13,15 +13,21 @@ type UsersType = {
 
 class Users extends React.Component<UsersType> {
 
-    constructor(props: UsersType) {
-        super(props);
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response =>
-            props.setUsers(response.data.items));
+            this.props.setUsers(response.data.items));
     }
 
     render() {
         return (
             <div className={g.users}>
+                <div className={g.pagination}>
+                    <span className={g.selectedPage}>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
                 {
                     this.props.items.map(u => <div key={u.id} className={g.one_user}>
                     <span>
