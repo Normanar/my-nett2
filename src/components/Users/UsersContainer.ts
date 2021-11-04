@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import Users from "./Users";
 import {AppRootStateType} from "../../Redux/redux-store";
-import {followAC, initialStateType, setUsersAC, unfollowAC, userItemType} from "../../Redux/users-reducer";
+import {followAC, initialStateType, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, userItemType} from "../../Redux/users-reducer";
 import {Dispatch} from "redux";
 
 const mapStateToProps = (state: AppRootStateType) : initialStateType => {
@@ -23,6 +23,12 @@ const mapDispatchToProps = (dispatch : Dispatch) => {
         },
         setUsers: (users: Array<userItemType>) => {
             dispatch(setUsersAC(users))
+        },
+        setCurrentPage: (currentPage: number) => {
+            dispatch(setCurrentPageAC(currentPage))
+        },
+        setTotalUsersCount: (totalCount: number) => {
+            dispatch(setTotalUsersCountAC(totalCount))
         }
 
     }

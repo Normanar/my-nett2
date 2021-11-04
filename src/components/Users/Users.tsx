@@ -9,39 +9,46 @@ type UsersType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     setUsers: (users: Array<userItemType>) => void
+    setCurrentPage: (currentPage: number) => void
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    setTotalUsersCount: (totalCount: number) => void
 }
 
 class Users extends React.Component<UsersType> {
 
     componentDidMount() {
-        console.log("comp111")
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => this.props.setUsers(response.data.items));
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            });
+    }
+
+    setNewCurrentPage = (currentPage: number) => {
+        this.props.setCurrentPage(currentPage)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
+            .then(response => this.props.setUsers(response.data.items))
     }
 
     render() {
 
-        // let pagesCount = (this.props.totalUsersCount + this.props.pageSize - 1) / this.props.pageSize
         let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+
+        let pagesCountWithoutPagination = pagesCount > 20 ? 20 : pagesCount // temporary solution because i do not do pagination
 
         let pages = []
 
-        for (let i = 1; i <= pagesCount; i++) {
+        for (let i = 1; i <= pagesCountWithoutPagination; i++) {
             pages.push(i)
         }
 
         return (
             <div className={g.users}>
                 <div className={g.pagination}>
-                    {/*<span className={g.selectedPage}>1</span>*/}
-                    {/*<span>2</span>*/}
-                    {/*<span>3</span>*/}
-                    {/*<span>4</span>*/}
-                    {/*<span>5</span>*/}
-                    {pages.map(p => <span className={this.props.currentPage === p ? g.selectedPage : ""}>{p}</span>)}
+                    {pages.map(p => <button className={this.props.currentPage === p ? g.selectedPage : g.nonSelectedPage}
+                    onClick={() => this.setNewCurrentPage(p)}>{p}</button>)}
                 </div>
                 {
                     this.props.items.map(u => <div key={u.id} className={g.one_user}>
