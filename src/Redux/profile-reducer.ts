@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {AllActionsType} from "./store";
 
 type postType = {
     id: string
@@ -25,6 +24,8 @@ let initialState: InitialStateType = {
     newMyPost: '',
 
 }
+
+type AllActionsType = ReturnType<typeof addNewMyPostAC> | ReturnType<typeof updateNewMyPostAC>
 
 
 export const profileReducer = (state = initialState, action: AllActionsType): InitialStateType => {
@@ -52,4 +53,17 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
         default:
             return state;
     }
+}
+
+export const addNewMyPostAC = () => {
+    return {
+        type : 'ADD-NEW-MY-POST'
+    } as const
+}
+
+export const updateNewMyPostAC = (newText: string) => {
+    return {
+        type : 'UPDATE-NEW-MY-POST',
+        newText: newText,
+    } as const
 }
