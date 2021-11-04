@@ -6,7 +6,10 @@ import {Dispatch} from "redux";
 
 const mapStateToProps = (state: AppRootStateType) : initialStateType => {
     return {
-        items: state.usersPage.items
+        items: state.usersPage.items,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
     }
 }
 

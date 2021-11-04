@@ -14,10 +14,16 @@ export type userItemType = {
 
 export type initialStateType = {
     items: Array<userItemType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState: initialStateType = {
-    items: [ ]
+    items: [ ],
+    pageSize: 5,
+    totalUsersCount: 11,
+    currentPage: 1,
 }
 
 type AllActionType = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUsersAC>
@@ -51,7 +57,8 @@ export const usersReducer = (state = initialState, action: AllActionType) : init
             };
 
         case 'SET_USERS' :
-            return {...state, items: [...state.items, ...action.users]}
+            // return {...state, items: [...state.items, ...action.users]}
+            return {...state, items: [...action.users]}
 
         default:
             return state

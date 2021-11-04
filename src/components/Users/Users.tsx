@@ -9,24 +9,39 @@ type UsersType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     setUsers: (users: Array<userItemType>) => void
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 class Users extends React.Component<UsersType> {
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response =>
-            this.props.setUsers(response.data.items));
+        console.log("comp111")
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => this.props.setUsers(response.data.items));
     }
 
     render() {
+
+        // let pagesCount = (this.props.totalUsersCount + this.props.pageSize - 1) / this.props.pageSize
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+
+        let pages = []
+
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return (
             <div className={g.users}>
                 <div className={g.pagination}>
-                    <span className={g.selectedPage}>1</span>
-                    <span>2</span>
-                    <span>3</span>
-                    <span>4</span>
-                    <span>5</span>
+                    {/*<span className={g.selectedPage}>1</span>*/}
+                    {/*<span>2</span>*/}
+                    {/*<span>3</span>*/}
+                    {/*<span>4</span>*/}
+                    {/*<span>5</span>*/}
+                    {pages.map(p => <span className={this.props.currentPage === p ? g.selectedPage : ""}>{p}</span>)}
                 </div>
                 {
                     this.props.items.map(u => <div key={u.id} className={g.one_user}>
