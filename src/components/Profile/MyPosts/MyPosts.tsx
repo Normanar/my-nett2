@@ -19,7 +19,9 @@ type MyPostsType = {
 const MyPosts: React.FC<MyPostsType> = (props) => {
 
     const onClickHandler = () => {
-        props.addNewMyPost()
+        if (props.newMyPost) {
+            props.addNewMyPost()
+        }
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,7 +42,9 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
                     <div>
                         <textarea value={props.newMyPost}
                                   onChange={onChangeHandler}
-                                  onKeyPress={onKeyPressEnter}></textarea>
+                                  onKeyPress={onKeyPressEnter}
+                                  placeholder={"new post"}
+                        > </textarea>
                     </div>
                     <div>
                         <button onClick={onClickHandler} >Add post</button>
