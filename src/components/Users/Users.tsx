@@ -1,7 +1,7 @@
 import React from "react";
 import g from "./user.module.css"
 import {userItemType} from "../../Redux/users-reducer";
-import avatar from "../../avatar/avatar.png"
+import avatar from "../../images/avatar.png"
 
 type UsersType = {
     currentPage: number

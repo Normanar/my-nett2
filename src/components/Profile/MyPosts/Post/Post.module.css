@@ -94,3 +94,34 @@
     top: 0;
     left: -4px;
 }
+
+.heartNonRed{
+    width: 8px;
+    height: 8px;
+    background-color: darkgrey;
+    transform: rotate(45deg);
+    position: relative;
+    margin-top: 7px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.heartNonRed::before,
+.heartNonRed::after{
+    content : '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: darkgrey;
+    border-radius: 50%;
+    position: absolute;
+}
+.heartNonRed::before {
+    top: -4px;
+    left: 0;
+}
+
+.heartNonRed::after {
+    top: 0;
+    left: -4px;
+}

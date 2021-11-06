@@ -1,5 +1,5 @@
 import React from "react";
-import {addNewMyPostAC, updateNewMyPostAC} from "../../../Redux/profile-reducer";
+import {addNewMyPostAC, likeAC, updateNewMyPostAC} from "../../../Redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {AppRootStateType} from "../../../Redux/redux-store";
 import {connect} from "react-redux";
@@ -34,6 +34,7 @@ type postType = {
     id: string
     message: string
     like: string
+    isRedLike: boolean
 }
 
 type MapStateToPropsType = {
@@ -44,6 +45,7 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     addNewMyPost: () => void
     updateNewMyPost: (text: string) => void
+    setLike: (postID: string, isRedLikeStatus: boolean) => void
 }
 
 let mapStateToProps = (state: AppRootStateType) : MapStateToPropsType => {
@@ -56,7 +58,8 @@ let mapStateToProps = (state: AppRootStateType) : MapStateToPropsType => {
 let mapDispatchToProps = (dispatch: Dispatch) : MapDispatchToPropsType => {
     return {
         addNewMyPost: () => dispatch(addNewMyPostAC()),
-        updateNewMyPost: (text: string) => dispatch(updateNewMyPostAC(text))
+        updateNewMyPost: (text: string) => dispatch(updateNewMyPostAC(text)),
+        setLike: (postID: string, isRedLikeStatus: boolean) => dispatch(likeAC(postID, isRedLikeStatus))
     }
 }
 

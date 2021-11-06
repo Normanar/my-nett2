@@ -10,7 +10,7 @@ const ProfileInfo = () => {
             </div>
             <div className={g.profileInfoDescription}>
                 <div className={g.profileAvatar}>
-                    <img alt={"avatar"} src={linkAvatar}/>
+                    <img alt={"images"} src={linkAvatar}/>
                 </div>
                 <div className={g.profileDescription}>
                     <div>Name: Roy Trenneman</div>

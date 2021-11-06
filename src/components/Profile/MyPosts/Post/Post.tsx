@@ -1,9 +1,6 @@
 import g from "./Post.module.css";
 import React from "react";
 import {linkPost} from "../../../Link/Links"
-import {postsType} from "../MyPosts";
-
-
 
 // const Post: React.FC<postsType> = (props) => {
 //     return (
@@ -19,7 +16,13 @@ import {postsType} from "../MyPosts";
 // }
 //
 // export default Post;
-
+type postsType = {
+    id: string
+    message: string
+    like: string
+    isRedLike: boolean
+    setLike: (postID: string, isRedLikeStatus: boolean) => void
+}
 
 const Post: React.FC<postsType> = (props) => {
     return (
@@ -31,7 +34,9 @@ const Post: React.FC<postsType> = (props) => {
                 <div className={g.post_message_text}>{props.message}</div>
                 <div className={g.like}>
                     <div>{props.like}</div>
-                    <div className={g.heart}></div>
+                    <div className={props.isRedLike ? g.heart : g.heartNonRed}
+                         onClick={() => props.setLike(props.id, !props.isRedLike)}
+                    ></div>
                 </div>
             </div>
         </div>

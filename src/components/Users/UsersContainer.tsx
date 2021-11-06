@@ -6,13 +6,15 @@ import {
     initialStateType,
     setCurrentPageAC,
     setTotalUsersCountAC,
-    setUsersAC,
+    setUsersAC, toggleIsLoadingAC,
     unfollowAC,
     userItemType
 } from "../../Redux/users-reducer";
 import {Dispatch} from "redux";
 import axios from "axios";
 import React from "react";
+import preloader from "../../images/preloader.svg"
+import g from "./usersContainer.module.css"
 
 type UsersContainerWithAxiosType = {
     items: Array<userItemType>
@@ -24,34 +26,48 @@ type UsersContainerWithAxiosType = {
     totalUsersCount: number
     currentPage: number
     setTotalUsersCount: (totalCount: number) => void
+    isLoading: boolean
+    toggleIsLoading: (isLoading: boolean) => void
 }
 
 class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosType> {
 
     componentDidMount() {
+        this.props.toggleIsLoading(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsLoading(false)
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
             });
     }
 
     setNewCurrentPage = (currentPage: number) => {
+        this.props.toggleIsLoading(false)
         this.props.setCurrentPage(currentPage)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
-            .then(response => this.props.setUsers(response.data.items))
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.toggleIsLoading(false)
+            })
+
     }
 
     render() {
         return (
-            <Users currentPage={this.props.currentPage}
-                   totalUsersCount={this.props.totalUsersCount}
-                   pageSize={this.props.pageSize}
-                   setNewCurrentPage={this.setNewCurrentPage}
-                   items={this.props.items}
-                   follow={this.props.follow}
-                   unfollow={this.props.unfollow}
-            />
+            <>  {this.props.isLoading ?
+                <div className={g.loading}>
+                    <img src={preloader} alt={"preload"} className={g.preloader}/>
+                </div>
+                : <Users currentPage={this.props.currentPage}
+                         totalUsersCount={this.props.totalUsersCount}
+                         pageSize={this.props.pageSize}
+                         setNewCurrentPage={this.setNewCurrentPage}
+                         items={this.props.items}
+                         follow={this.props.follow}
+                         unfollow={this.props.unfollow}
+                />}
+            </>
         )
 
     }
@@ -64,6 +80,7 @@ const mapStateToProps = (state: AppRootStateType): initialStateType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
+        isLoading: state.usersPage.isLoading,
     }
 }
 
@@ -83,6 +100,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         },
         setTotalUsersCount: (totalCount: number) => {
             dispatch(setTotalUsersCountAC(totalCount))
+        },
+        toggleIsLoading: (isLoading: boolean) => {
+            dispatch(toggleIsLoadingAC(isLoading))
         }
 
     }

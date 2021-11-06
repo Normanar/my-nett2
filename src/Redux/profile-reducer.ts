@@ -4,6 +4,7 @@ type postType = {
     id: string
     message: string
     like: string
+    isRedLike: boolean
 }
 
 type InitialStateType = {
@@ -13,19 +14,31 @@ type InitialStateType = {
 
 let initialState: InitialStateType = {
     posts: [
-        {id: v1(), message: "Have you tried turning it off and on again?", like: "5"},
+        {
+            id: v1(),
+            message: "Have you tried turning it off and on again?",
+            like: "5",
+            isRedLike: false,
+        },
         {
             id: v1(),
             message: "Didn't know what a stress machine as this morning, and now we have two of them.",
-            like: "50"
+            like: "50",
+            isRedLike: true,
         },
-        {id: v1(), message: "London is the capital and largest city of England and the United Kingdom.", like: "15"},
+        {
+            id: v1(),
+            message: "London is the capital and largest city of England and the United Kingdom.",
+            like: "15",
+            isRedLike: false,
+        },
     ],
     newMyPost: '',
-
 }
 
-type AllActionsType = ReturnType<typeof addNewMyPostAC> | ReturnType<typeof updateNewMyPostAC>
+type AllActionsType = ReturnType<typeof addNewMyPostAC>
+    | ReturnType<typeof updateNewMyPostAC>
+    | ReturnType<typeof likeAC>
 
 
 export const profileReducer = (state = initialState, action: AllActionsType): InitialStateType => {
@@ -39,7 +52,7 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
             // return stateCopy }
             return {
                 ...state,
-                posts: [...state.posts, {id: v1(), message: state.newMyPost, like: "0"}],
+                posts: [...state.posts, {id: v1(), message: state.newMyPost, like: "0", isRedLike: false}],
                 newMyPost: ''
             };
         }
@@ -48,6 +61,12 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
             return {
                 ...state,
                 newMyPost: action.newText
+            }
+        case "SET-LIKE":
+            return {
+                ...state, posts: state.posts.map(p => (
+                    p.id === action.postID ? {...p, isRedLike: action.isRedLikeStatus} : p
+                ))
             }
 
         default:
@@ -65,5 +84,13 @@ export const updateNewMyPostAC = (newText: string) => {
     return {
         type : 'UPDATE-NEW-MY-POST',
         newText: newText,
+    } as const
+}
+
+export const likeAC = (postID: string, isRedLikeStatus: boolean) => {
+    return {
+        type : 'SET-LIKE',
+        postID,
+        isRedLikeStatus,
     } as const
 }

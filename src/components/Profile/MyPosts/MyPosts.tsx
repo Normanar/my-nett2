@@ -6,11 +6,13 @@ export type postsType = {
     id: string
     message: string
     like: string
+    isRedLike: boolean
 }
 
 type MyPostsType = {
     addNewMyPost: () => void
     updateNewMyPost: (text: string) => void
+    setLike: (postID: string, isRedLikeStatus: boolean) => void
     posts: Array<postsType>
     newMyPost: string
 }
@@ -52,7 +54,12 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
                 </div>
             </div>
             <div className={g.myPostsPost}>
-                {props.posts.map(t => <Post message={t.message} like={t.like} id={t.id}/>)}
+                {props.posts.map(t => <Post message={t.message}
+                                            like={t.like}
+                                            id={t.id}
+                                            isRedLike={t.isRedLike}
+                                            setLike={props.setLike}
+                />)}
             </div>
 
         </div>

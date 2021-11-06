@@ -17,6 +17,7 @@ export type initialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isLoading: boolean
 }
 
 let initialState: initialStateType = {
@@ -24,6 +25,7 @@ let initialState: initialStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isLoading: false,
 }
 
 type AllActionType = ReturnType<typeof followAC>
@@ -31,6 +33,8 @@ type AllActionType = ReturnType<typeof followAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof toggleIsLoadingAC>
+
 
 
 
@@ -70,6 +74,9 @@ export const usersReducer = (state = initialState, action: AllActionType) : init
         case "SET_TOTAL_USERS_COUNT":
             return {...state, totalUsersCount: action.totalCount }
 
+        case "TOGGLE_IS_LOADING":
+            return {...state, isLoading: action.isLoading }
+
         default:
             return state
     }
@@ -108,6 +115,13 @@ export const setTotalUsersCountAC = (totalCount: number) => {
     return {
         type: "SET_TOTAL_USERS_COUNT",
         totalCount,
+    } as const
+}
+
+export const toggleIsLoadingAC = (isLoading: boolean) => {
+    return {
+        type: "TOGGLE_IS_LOADING",
+        isLoading,
     } as const
 }
 
