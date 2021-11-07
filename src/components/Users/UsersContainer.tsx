@@ -2,12 +2,12 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {
-    followAC,
+    follow,
     initialStateType,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toggleIsLoadingAC,
-    unfollowAC,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers, toggleIsLoading,
+    unfollow,
     userItemType
 } from "../../Redux/users-reducer";
 import {Dispatch} from "redux";
@@ -84,28 +84,29 @@ const mapStateToProps = (state: AppRootStateType): initialStateType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        follow: (userID: number) => {
-            dispatch(followAC(userID))
-        },
-        unfollow: (userID: number) => {
-            dispatch(unfollowAC(userID))
-        },
-        setUsers: (users: Array<userItemType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsLoading: (isLoading: boolean) => {
-            dispatch(toggleIsLoadingAC(isLoading))
-        }
+// const mapDispatchToProps = (dispatch: Dispatch) => {
+//     return {
+//         follow: (userID: number) => {
+//             dispatch(follow(userID))
+//         },
+//         unfollow: (userID: number) => {
+//             dispatch(unfollow(userID))
+//         },
+//         setUsers: (users: Array<userItemType>) => {
+//             dispatch(setUsers(users))
+//         },
+//         setCurrentPage: (currentPage: number) => {
+//             dispatch(setCurrentPage(currentPage))
+//         },
+//         setTotalUsersCount: (totalCount: number) => {
+//             dispatch(setTotalUsersCount(totalCount))
+//         },
+//         toggleIsLoading: (isLoading: boolean) => {
+//             dispatch(toggleIsLoading(isLoading))
+//         }
+//
+//     }
+// }
 
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainerWithAxios);
+export default connect(mapStateToProps, {
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsLoading})(UsersContainerWithAxios);

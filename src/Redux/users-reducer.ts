@@ -28,12 +28,12 @@ let initialState: initialStateType = {
     isLoading: false,
 }
 
-type AllActionType = ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>
-    | ReturnType<typeof toggleIsLoadingAC>
+type AllActionType = ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsLoading>
 
 
 
@@ -83,47 +83,95 @@ export const usersReducer = (state = initialState, action: AllActionType) : init
 
 }
 
-export const followAC = (userID : number) => {
+export const follow = (userID : number) => {
     return {
         type: "FOLLOW",
         userID: userID,
     } as const
 }
 
-export const unfollowAC = (userID : number) => {
+export const unfollow = (userID : number) => {
     return {
         type: "UNFOLLOW",
         userID: userID,
     } as const
 }
 
-export const setUsersAC = (users : Array<userItemType>) => {
+export const setUsers = (users : Array<userItemType>) => {
     return {
         type: "SET_USERS",
         users
     } as const
 }
 
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: "SET_CURRENT_PAGE",
         currentPage,
     } as const
 }
 
-export const setTotalUsersCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
     return {
         type: "SET_TOTAL_USERS_COUNT",
         totalCount,
     } as const
 }
 
-export const toggleIsLoadingAC = (isLoading: boolean) => {
+export const toggleIsLoading = (isLoading: boolean) => {
     return {
         type: "TOGGLE_IS_LOADING",
         isLoading,
     } as const
 }
+
+
+
+
+
+
+
+// export const followAC = (userID : number) => {
+//     return {
+//         type: "FOLLOW",
+//         userID: userID,
+//     } as const
+// }
+//
+// export const unfollowAC = (userID : number) => {
+//     return {
+//         type: "UNFOLLOW",
+//         userID: userID,
+//     } as const
+// }
+//
+// export const setUsersAC = (users : Array<userItemType>) => {
+//     return {
+//         type: "SET_USERS",
+//         users
+//     } as const
+// }
+//
+// export const setCurrentPageAC = (currentPage: number) => {
+//     return {
+//         type: "SET_CURRENT_PAGE",
+//         currentPage,
+//     } as const
+// }
+//
+// export const setTotalUsersCountAC = (totalCount: number) => {
+//     return {
+//         type: "SET_TOTAL_USERS_COUNT",
+//         totalCount,
+//     } as const
+// }
+//
+// export const toggleIsLoadingAC = (isLoading: boolean) => {
+//     return {
+//         type: "TOGGLE_IS_LOADING",
+//         isLoading,
+//     } as const
+// }
 
 
 
