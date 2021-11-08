@@ -10,7 +10,6 @@ import {
     unfollow,
     userItemType
 } from "../../Redux/users-reducer";
-import {Dispatch} from "redux";
 import axios from "axios";
 import React from "react";
 import preloader from "../../images/preloader.svg"
