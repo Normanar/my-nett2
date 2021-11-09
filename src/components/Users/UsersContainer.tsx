@@ -14,6 +14,7 @@ import axios from "axios";
 import React from "react";
 import preloader from "../../images/preloader.svg"
 import g from "./usersContainer.module.css"
+import {Preloader} from "../Preloader/Preloader";
 
 type UsersContainerWithAxiosType = {
     items: Array<userItemType>
@@ -53,11 +54,18 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
     }
 
     render() {
+
+        const stylePreloader = {
+            width: "400px",
+            height: "400px"
+        }
+
         return (
             <>  {this.props.isLoading ?
-                <div className={g.loading}>
-                    <img src={preloader} alt={"preload"} className={g.preloader}/>
-                </div>
+                <Preloader style={stylePreloader}/>
+                // <div className={g.loading}>
+                //     <img src={preloader} alt={"preload"} className={g.preloader}/>
+                // </div>
                 : <Users currentPage={this.props.currentPage}
                          totalUsersCount={this.props.totalUsersCount}
                          pageSize={this.props.pageSize}

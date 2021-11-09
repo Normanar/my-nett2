@@ -6,7 +6,6 @@ import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from "./components/Users/UsersContainer";
-import MyPage from "./components/My page/MyPage";
 
 function App() {
 
@@ -19,7 +18,6 @@ function App() {
                     <Route path={"/messages"} render={() => <DialogsContainer/>}/>
                     <Route path={"/profile"} render={() => <Profile/>}/>
                     <Route path={"/users"} render={() => <UsersContainer/>}/>
-                    <Route path={"/my_page"} render={() => <MyPage/>}/>
                 </div>
             </div>
         </BrowserRouter>

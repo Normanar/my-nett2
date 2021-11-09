@@ -6,9 +6,6 @@ const Navbar = () => {
     return (
         <nav className={g.nav}>
             <div>
-                <NavLink to="/my_page" activeClassName={g.activeLink}>My page</NavLink>
-            </div>
-            <div>
                 <NavLink to="/profile" activeClassName={g.activeLink}>Profile</NavLink>
             </div>
             <div>
