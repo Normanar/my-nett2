@@ -1,5 +1,27 @@
 import {v1} from "uuid";
 
+export type ProfileType = {
+    aboutMe: string | null
+    contacts: {
+        facebook: string | null
+        website: string | null
+        vk: string | null
+        twitter: string | null
+        instagram: string | null
+        youtube: string | null
+        github: string | null
+        mainLink: string | null
+    }
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    fullName: string
+    userId: number
+    photos: {
+        small: string | null
+        large: string | null
+    }
+}
+
 type postType = {
     id: string
     message: string
@@ -7,9 +29,10 @@ type postType = {
     isRedLike: boolean
 }
 
-type InitialStateType = {
+export type InitialStateType = {
     posts: Array<postType>
     newMyPost: string
+    profile: ProfileType
 }
 
 let initialState: InitialStateType = {
@@ -34,11 +57,33 @@ let initialState: InitialStateType = {
         },
     ],
     newMyPost: '',
+    profile: {
+        aboutMe: null,
+        contacts: {
+            facebook: null,
+            website: null,
+            vk: null,
+            twitter: null,
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null,
+        },
+        lookingForAJob: false,
+        lookingForAJobDescription: null,
+        fullName: "I",
+        userId: 0,
+        photos: {
+            small: null,
+            large: null,
+        }
+    }
 }
 
 type AllActionsType = ReturnType<typeof addNewMyPostAC>
     | ReturnType<typeof updateNewMyPostAC>
     | ReturnType<typeof likeAC>
+    | ReturnType<typeof setUserProfile>
 
 
 export const profileReducer = (state = initialState, action: AllActionsType): InitialStateType => {
@@ -69,6 +114,9 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
                 ))
             }
 
+        case "SET-PROFILE":
+            return {...state, profile : action.profile}
+
         default:
             return state;
     }
@@ -76,21 +124,28 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
 
 export const addNewMyPostAC = () => {
     return {
-        type : 'ADD-NEW-MY-POST'
+        type: 'ADD-NEW-MY-POST'
     } as const
 }
 
 export const updateNewMyPostAC = (newText: string) => {
     return {
-        type : 'UPDATE-NEW-MY-POST',
+        type: 'UPDATE-NEW-MY-POST',
         newText: newText,
     } as const
 }
 
 export const likeAC = (postID: string, isRedLikeStatus: boolean) => {
     return {
-        type : 'SET-LIKE',
+        type: 'SET-LIKE',
         postID,
         isRedLikeStatus,
+    } as const
+}
+
+export const setUserProfile = (profile: ProfileType) => {
+    return {
+        type: 'SET-PROFILE',
+        profile
     } as const
 }

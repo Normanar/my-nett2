@@ -1,18 +1,17 @@
 import React from "react";
 import g from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {StoreReduxType} from "../../Redux/redux-store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {ProfileType} from "../../Redux/profile-reducer";
 
-// type ProfileType = {
-//     store: StoreReduxType
-// }
+type ProfilePropsType = {
+    profile: ProfileType
+}
 
-
-const Profile: React.FC = (props) => {
+const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div className={g.content}>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer />
         </div>
     )

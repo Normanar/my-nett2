@@ -1,6 +1,7 @@
 import g from "./MyPosts.module.css";
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import Post from "./Post/Post";
+import {ProfileType} from "../../../Redux/profile-reducer";
 
 export type postsType = {
     id: string
@@ -15,6 +16,7 @@ type MyPostsType = {
     setLike: (postID: string, isRedLikeStatus: boolean) => void
     posts: Array<postsType>
     newMyPost: string
+    profile: ProfileType
 }
 
 
@@ -59,6 +61,7 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
                                             id={t.id}
                                             isRedLike={t.isRedLike}
                                             setLike={props.setLike}
+                                            photos={props.profile.photos}
                 />)}
             </div>
 

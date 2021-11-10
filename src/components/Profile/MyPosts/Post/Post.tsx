@@ -1,6 +1,6 @@
 import g from "./Post.module.css";
 import React from "react";
-import {linkPost} from "../../../Link/Links"
+import avatar from "../../../../images/avatar.png"
 
 // const Post: React.FC<postsType> = (props) => {
 //     return (
@@ -22,13 +22,17 @@ type postsType = {
     like: string
     isRedLike: boolean
     setLike: (postID: string, isRedLikeStatus: boolean) => void
+    photos: {
+        small: string | null
+        large: string | null
+    }
 }
 
 const Post: React.FC<postsType> = (props) => {
     return (
         <div className={g.postItem}>
             <div className={g.avatar}>
-                <img src={linkPost} id={props.id}/>
+                <img src={props.photos.small === null ? avatar : props.photos.small} id={props.id}/>
             </div>
             <div className={g.post_message}>
                 <div className={g.post_message_text}>{props.message}</div>

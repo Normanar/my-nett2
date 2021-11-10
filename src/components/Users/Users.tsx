@@ -2,6 +2,7 @@ import React from "react";
 import g from "./user.module.css"
 import {userItemType} from "../../Redux/users-reducer";
 import avatar from "../../images/avatar.png"
+import {NavLink} from "react-router-dom";
 
 type UsersType = {
     currentPage: number
@@ -25,7 +26,7 @@ const Users: React.FC<UsersType> = (props) => {
         pages.push(i)
     }
 
-    return(
+    return (
         <div className={g.users}>
             <div className={g.pagination}>
                 {pages.map(p => <button className={props.currentPage === p ? g.selectedPage : g.nonSelectedPage}
@@ -34,11 +35,13 @@ const Users: React.FC<UsersType> = (props) => {
             {
                 props.items.map(u => <div key={u.id} className={g.one_user}>
                     <span>
-                        <div className={g.user_avatar}>
-                            <img
-                                src={u.photos.small || avatar}
-                                alt={"user"}/>
-                        </div>
+                        <NavLink to={"/profile/" + u.id}>
+                            <div className={g.user_avatar}>
+                                <img
+                                    src={u.photos.small || avatar}
+                                    alt={"user"}/>
+                            </div>
+                        </NavLink>
                         <div>
                             {u.followed ?
                                 <button onClick={() => {
