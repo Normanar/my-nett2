@@ -35,7 +35,7 @@ export type InitialStateType = {
     profile: ProfileType
 }
 
-let initialState: InitialStateType = {
+export let initialState: InitialStateType = {
     posts: [
         {
             id: v1(),
@@ -71,7 +71,7 @@ let initialState: InitialStateType = {
         },
         lookingForAJob: false,
         lookingForAJobDescription: null,
-        fullName: "I",
+        fullName: "JustForFirstRenderNameOnly",
         userId: 0,
         photos: {
             small: null,
