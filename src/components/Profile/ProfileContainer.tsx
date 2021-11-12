@@ -32,7 +32,17 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
         if (!userID) {
             userID = "19112"
         }
-
+        //----------------
+        // const settings = {
+        //     withCredentials: true,
+        //     headers: {
+        //         'API-KEY': 'eaf34c04-f789-4b8a-b729-c59d43de7ca7'
+        //     }
+        //
+        // }
+        // axios.put('https://social-network.samuraijs.com/api/1.0/profile/status', {status : "Good luck everyone!"}, settings)
+        //     .then(response => console.log(response) )
+        //-------------
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
             .then(response => this.props.setUserProfile(response.data))
     }
