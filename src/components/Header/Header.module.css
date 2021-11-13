@@ -2,6 +2,9 @@
     grid-area: h;
     background-color: #24272C;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
@@ -19,4 +22,15 @@
 
 .header_text:before{
     content: '\003C';
+}
+
+.loginBlock {
+    margin-right: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
 }

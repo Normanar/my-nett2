@@ -1,12 +1,20 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 import g from './Header.module.css'
+import {HeaderContainerWithAxiosPropsType} from "./HeaderContainer";
 
-const Header = () => {
+type HeaderPropsType = HeaderContainerWithAxiosPropsType
+
+const Header: React.FC<HeaderPropsType> = (props) => {
     return (
         <header className={g.header}>
-            {/*<img alt='logo'*/}
-            {/*     src='https://image.flaticon.com/icons/png/512/145/145799.png'/>*/}
             <div className={g.header_text}>FriendFace /</div>
+            {props.isAuth
+                ? <div className={g.loginBlock}>{props.login}</div>
+                : <NavLink to={"/login"}>
+                    <div className={g.loginBlock}>Login</div>
+                </NavLink>
+            }
         </header>
     )
 }
