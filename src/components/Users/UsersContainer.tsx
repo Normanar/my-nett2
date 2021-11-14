@@ -10,7 +10,6 @@ import {
     unfollow,
     userItemType
 } from "../../Redux/users-reducer";
-import axios from "axios";
 import React from "react";
 import preloader from "../../images/preloader.svg"
 import g from "./usersContainer.module.css"
@@ -35,9 +34,6 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
 
     componentDidMount() {
         this.props.toggleIsLoading(true)
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-        //     withCredentials: true
-        // })
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(response => {
                 this.props.toggleIsLoading(false)
@@ -49,9 +45,7 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
     setNewCurrentPage = (currentPage: number) => {
         this.props.toggleIsLoading(true)
         this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
+        usersAPI.getUsers(currentPage, this.props.pageSize)
             .then(response => {
                 this.props.setUsers(response.data.items)
                 this.props.toggleIsLoading(false)
