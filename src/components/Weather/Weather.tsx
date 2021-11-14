@@ -21,7 +21,7 @@ type WeatherPropsType = mapStateToPropsType & mapDispatchToPropsType
 function Weather(props : WeatherPropsType) {
 
     useEffect( () => {
-        props.toggleIsLoadingWeather(false)
+        props.toggleIsLoadingWeather(true)
         axios.get('https://api.openweathermap.org/data/2.5/weather?q=Nur-Sultan&appid=0bc81707c4906cfe7a4b8e7c4d7a44db&units=metric')
             .then( resp => {
                 props.setWeatherData(resp.data.main.temp, resp.data.main.feels_like, resp.data.name, resp.data.weather[0].main, resp.data.weather[0].icon)
