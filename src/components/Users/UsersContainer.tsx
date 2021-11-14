@@ -15,6 +15,7 @@ import React from "react";
 import preloader from "../../images/preloader.svg"
 import g from "./usersContainer.module.css"
 import {Preloader} from "../Preloader/Preloader";
+import { usersAPI } from "../../api/api";
 
 type UsersContainerWithAxiosType = {
     items: Array<userItemType>
@@ -34,9 +35,10 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
 
     componentDidMount() {
         this.props.toggleIsLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+        //     withCredentials: true
+        // })
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(response => {
                 this.props.toggleIsLoading(false)
                 this.props.setUsers(response.data.items)
