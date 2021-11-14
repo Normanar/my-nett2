@@ -6,6 +6,7 @@ export type initialStateWeatherReducerType = {
     name_city: string
     main: string
     icon: string
+    isLoading: boolean
 }
 
 let initialStateWeatherReducer: initialStateWeatherReducerType = {
@@ -14,14 +15,18 @@ let initialStateWeatherReducer: initialStateWeatherReducerType = {
     name_city: "",
     main: "",
     icon: "",
+    isLoading: false
 }
 
-type setWeatherReducerACType = ReturnType<typeof setWeatherReducerAC>
+type setWeatherReducerACType = ReturnType<typeof setWeatherReducerAC> | ReturnType<typeof toggleIsLoadingWeatherAC>
 
 export const weatherReducer = (state = initialStateWeatherReducer, action: setWeatherReducerACType) => {
     switch (action.type) {
         case SET_WEATHER_DATA :
             return {...state, ...action.data}
+
+        case "TOGGLE_IS_LOADING_WEATHER":
+            return {...state, isLoading: action.isLoading}
 
         default:
             return state
@@ -34,5 +39,12 @@ export const setWeatherReducerAC = (temp: number, feels_like: number, name_city:
         data : {
             temp, feels_like, name_city, main, icon
         }
+    } as const
+}
+
+export const toggleIsLoadingWeatherAC = (isLoading: boolean) => {
+    return {
+        type: "TOGGLE_IS_LOADING_WEATHER",
+        isLoading,
     } as const
 }

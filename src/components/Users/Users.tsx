@@ -3,6 +3,7 @@ import g from "./user.module.css"
 import {userItemType} from "../../Redux/users-reducer";
 import avatar from "../../images/avatar.png"
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersType = {
     currentPage: number
@@ -45,10 +46,33 @@ const Users: React.FC<UsersType> = (props) => {
                         <div>
                             {u.followed ?
                                 <button onClick={() => {
-                                    props.unfollow(u.id)
+
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "eaf34c04-f789-4b8a-b729-c59d43de7ca7"
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.unfollow(u.id);
+                                            }
+                                        });
                                 }} className={g.button_user_follow_unfollow}>UNFOLLOW</button>
                                 : <button onClick={() => {
-                                    props.follow(u.id)
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "eaf34c04-f789-4b8a-b729-c59d43de7ca7"
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.follow(u.id);
+                                            }
+                                        });
+                                    // props.follow(u.id)
+
                                 }} className={g.button_user_follow_unfollow}>FOLLOW</button>}
                         </div>
                     </span>

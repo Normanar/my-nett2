@@ -34,7 +34,9 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
 
     componentDidMount() {
         this.props.toggleIsLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.toggleIsLoading(false)
                 this.props.setUsers(response.data.items)
@@ -43,15 +45,18 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
     }
 
     setNewCurrentPage = (currentPage: number) => {
-        this.props.toggleIsLoading(false)
+        this.props.toggleIsLoading(true)
         this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.setUsers(response.data.items)
                 this.props.toggleIsLoading(false)
             })
 
     }
+
 
     render() {
 

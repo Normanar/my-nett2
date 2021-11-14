@@ -13,12 +13,13 @@
     #1698AE
     */
     border-radius: 5px;
-
 }
 
 .profileAvatar img {
     height: 100px;
     width: 100px;
+    border: 2px solid white;
+    border-radius: 5px;
 }
 
 .profileDescription{
