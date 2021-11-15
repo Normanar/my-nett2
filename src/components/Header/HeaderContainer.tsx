@@ -1,33 +1,30 @@
 import React, {useEffect} from "react";
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {setAuthUserReducerAC} from "../../Redux/auth-reducer";
+import {usersAPI} from "../../api/api";
 
-const settings = {
-    withCredentials: true
-}
-
-type mapStateToProps = {
+type mapStateToPropsType = {
     isAuth: boolean
     login: string | null
 }
 
-type mapDispatchToProps = {
+type mapDispatchToPropsType = {
     setAuthUserReducer: (id: number, login: string, email: string) => void
 }
 
-export type HeaderContainerWithAxiosPropsType = mapStateToProps & mapDispatchToProps
+export type HeaderContainerWithAxiosPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function HeaderContainerWithAxios(props: HeaderContainerWithAxiosPropsType) {
 
     useEffect(() => {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', settings)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    let {id, login, email} = response.data.data
+        //
+        usersAPI.isLoginIn()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, login, email} = data.data
                     props.setAuthUserReducer(id, login, email)
                 }
             })
@@ -38,7 +35,7 @@ function HeaderContainerWithAxios(props: HeaderContainerWithAxiosPropsType) {
     )
 }
 
-const mapStateToProps = (state: AppRootStateType): mapStateToProps => {
+const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth,
         login: state.auth.login,
@@ -46,7 +43,7 @@ const mapStateToProps = (state: AppRootStateType): mapStateToProps => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         setAuthUserReducer: (id: number, login: string, email: string) => dispatch(setAuthUserReducerAC(id, login, email))
     }

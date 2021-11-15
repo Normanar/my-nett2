@@ -35,10 +35,10 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
     componentDidMount() {
         this.props.toggleIsLoading(true)
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(response => {
+            .then(data => {
                 this.props.toggleIsLoading(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             });
     }
 
@@ -46,8 +46,8 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
         this.props.toggleIsLoading(true)
         this.props.setCurrentPage(currentPage)
         usersAPI.getUsers(currentPage, this.props.pageSize)
-            .then(response => {
-                this.props.setUsers(response.data.items)
+            .then(data => {
+                this.props.setUsers(data.items)
                 this.props.toggleIsLoading(false)
             })
 
