@@ -33,7 +33,7 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
             userID = "19112"
         }
         usersAPI.getProfileOfUser(userID)
-            .then(response => this.props.setUserProfile(response.data))
+            .then(data => this.props.setUserProfile(data))
     }
 
     componentWillUnmount() {

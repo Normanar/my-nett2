@@ -11,10 +11,9 @@ import {
     userItemType
 } from "../../Redux/users-reducer";
 import React from "react";
-import preloader from "../../images/preloader.svg"
-import g from "./usersContainer.module.css"
 import {Preloader} from "../Preloader/Preloader";
 import { usersAPI } from "../../api/api";
+import {stylePreloaderUserContainer} from "../Preloader/styles for component/stylesOfPreloader";
 
 type UsersContainerWithAxiosType = {
     items: Array<userItemType>
@@ -56,14 +55,9 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
 
     render() {
 
-        const stylePreloader = {
-            width: "400px",
-            height: "400px"
-        }
-
         return (
             <>  {this.props.isLoading ?
-                <Preloader style={stylePreloader}/>
+                <Preloader style={stylePreloaderUserContainer}/>
                 // <div className={g.loading}>
                 //     <img src={preloader} alt={"preload"} className={g.preloader}/>
                 // </div>

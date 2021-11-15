@@ -16,10 +16,15 @@ export const usersAPI = {
 
     getProfileOfUser(userID: string) {
         return instance.get(`profile/${userID}`)
+            .then(response => response.data)
     },
 
     isLoginIn() {
         return instance.get('auth/me')
             .then(response => response.data)
-    }
+    },
+
+    getWeatherData() {
+        return axios.get('https://api.openweathermap.org/data/2.5/weather?q=Nur-Sultan&appid=0bc81707c4906cfe7a4b8e7c4d7a44db&units=metric')
+    },
 }
