@@ -18,14 +18,16 @@ export type initialStateType = {
     totalUsersCount: number
     currentPage: number
     isLoading: boolean
+    isFollowInProgress: number[]
 }
 
 let initialState: initialStateType = {
-    items: [ ],
+    items: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
     isLoading: false,
+    isFollowInProgress: []
 }
 
 type AllActionType = ReturnType<typeof follow>
@@ -34,18 +36,17 @@ type AllActionType = ReturnType<typeof follow>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsLoading>
+    | ReturnType<typeof toggleIsFollowIn>
 
 
-
-
-export const usersReducer = (state = initialState, action: AllActionType) : initialStateType => {
+export const usersReducer = (state = initialState, action: AllActionType): initialStateType => {
     switch (action.type) {
         case 'FOLLOW':
-             return {
+            return {
                 ...state,
                 items: state.items.map(u => {
                     if (action.userID === u.id) {
-                        return {...u, followed : true}
+                        return {...u, followed: true}
                     } else {
                         return {...u}
                     }
@@ -57,7 +58,7 @@ export const usersReducer = (state = initialState, action: AllActionType) : init
                 ...state,
                 items: state.items.map(u => {
                     if (action.userID === u.id) {
-                        return {...u, followed : false}
+                        return {...u, followed: false}
                     } else {
                         return {...u}
                     }
@@ -69,13 +70,21 @@ export const usersReducer = (state = initialState, action: AllActionType) : init
             return {...state, items: action.users};
 
         case 'SET_CURRENT_PAGE' :
-            return {...state, currentPage: action.currentPage }
+            return {...state, currentPage: action.currentPage}
 
         case "SET_TOTAL_USERS_COUNT":
-            return {...state, totalUsersCount: action.totalCount }
+            return {...state, totalUsersCount: action.totalCount}
 
         case "TOGGLE_IS_LOADING":
-            return {...state, isLoading: action.isLoading }
+            return {...state, isLoading: action.isLoading}
+
+        case "TOGGLE_IS_FOLLOWING":
+            return {
+                ...state,
+                isFollowInProgress: action.isFollowing
+                    ? [...state.isFollowInProgress, action.userID]
+                    : state.isFollowInProgress.filter(id => id !== action.userID)
+            }
 
         default:
             return state
@@ -83,21 +92,21 @@ export const usersReducer = (state = initialState, action: AllActionType) : init
 
 }
 
-export const follow = (userID : number) => {
+export const follow = (userID: number) => {
     return {
         type: "FOLLOW",
         userID: userID,
     } as const
 }
 
-export const unfollow = (userID : number) => {
+export const unfollow = (userID: number) => {
     return {
         type: "UNFOLLOW",
         userID: userID,
     } as const
 }
 
-export const setUsers = (users : Array<userItemType>) => {
+export const setUsers = (users: Array<userItemType>) => {
     return {
         type: "SET_USERS",
         users
@@ -125,10 +134,13 @@ export const toggleIsLoading = (isLoading: boolean) => {
     } as const
 }
 
-
-
-
-
+export const toggleIsFollowIn = (isFollowing: boolean, userID: number) => {
+    return {
+        type: "TOGGLE_IS_FOLLOWING",
+        isFollowing,
+        userID
+    } as const
+}
 
 
 // export const followAC = (userID : number) => {

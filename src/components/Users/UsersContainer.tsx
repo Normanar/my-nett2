@@ -6,13 +6,13 @@ import {
     initialStateType,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleIsLoading,
+    setUsers, toggleIsFollowIn, toggleIsLoading,
     unfollow,
     userItemType
 } from "../../Redux/users-reducer";
 import React from "react";
 import {Preloader} from "../Preloader/Preloader";
-import { usersAPI } from "../../api/api";
+import {usersAPI} from "../../api/api";
 import {stylePreloaderUserContainer} from "../Preloader/styles for component/stylesOfPreloader";
 
 type UsersContainerWithAxiosType = {
@@ -27,6 +27,8 @@ type UsersContainerWithAxiosType = {
     setTotalUsersCount: (totalCount: number) => void
     isLoading: boolean
     toggleIsLoading: (isLoading: boolean) => void
+    toggleIsFollowIn: (isFollowing: boolean, userID: number) => void
+    isFollowInProgress: number[]
 }
 
 class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosType> {
@@ -68,6 +70,9 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
                          items={this.props.items}
                          follow={this.props.follow}
                          unfollow={this.props.unfollow}
+                         isFollowInProgress={this.props.isFollowInProgress}
+                         toggleIsFollowIn={this.props.toggleIsFollowIn}
+
                 />}
             </>
         )
@@ -83,6 +88,7 @@ const mapStateToProps = (state: AppRootStateType): initialStateType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading,
+        isFollowInProgress: state.usersPage.isFollowInProgress
     }
 }
 
@@ -111,4 +117,5 @@ const mapStateToProps = (state: AppRootStateType): initialStateType => {
 // }
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsLoading})(UsersContainerWithAxios);
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsLoading, toggleIsFollowIn
+})(UsersContainerWithAxios);
