@@ -3,7 +3,7 @@ import g from "./News.module.css"
 
 export const News = () => {
     return (
-        <div>
+        <div className={g.newsBlock}>
             News is coming
         </div>
     )
