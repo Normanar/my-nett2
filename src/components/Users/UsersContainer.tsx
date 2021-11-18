@@ -3,10 +3,13 @@ import Users from "./Users";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {
     follow,
+    getUsersThunkCreator,
     initialStateType,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleIsFollowIn, toggleIsLoading,
+    setUsers,
+    toggleIsFollowIn,
+    toggleIsLoading,
     unfollow,
     userItemType
 } from "../../Redux/users-reducer";
@@ -29,18 +32,20 @@ type UsersContainerWithAxiosType = {
     toggleIsLoading: (isLoading: boolean) => void
     toggleIsFollowIn: (isFollowing: boolean, userID: number) => void
     isFollowInProgress: number[]
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
 class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosType> {
 
     componentDidMount() {
-        this.props.toggleIsLoading(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsLoading(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            });
+        // this.props.toggleIsLoading(true)
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+        //     .then(data => {
+        //         this.props.toggleIsLoading(false)
+        //         this.props.setUsers(data.items)
+        //         this.props.setTotalUsersCount(data.totalCount)
+        //     });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     setNewCurrentPage = (currentPage: number) => {
@@ -117,5 +122,7 @@ const mapStateToProps = (state: AppRootStateType): initialStateType => {
 // }
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsLoading, toggleIsFollowIn
+    follow, unfollow, setUsers,
+    setCurrentPage, setTotalUsersCount, toggleIsLoading,
+    toggleIsFollowIn, getUsers: getUsersThunkCreator
 })(UsersContainerWithAxios);

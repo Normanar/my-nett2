@@ -33,7 +33,7 @@ let initialState: initialStateType = {
     isFollowInProgress: []
 }
 
-type AllActionType = ReturnType<typeof follow>
+export type AllActionType = ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>

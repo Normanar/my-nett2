@@ -1,9 +1,10 @@
-import {combineReducers, createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
 import {weatherReducer} from "./weather-reducer";
+import thunk from "redux-thunk";
 
 
 let rootReducer = combineReducers({
@@ -14,7 +15,7 @@ let rootReducer = combineReducers({
     weather: weatherReducer,
 })
 
-export let store: StoreReduxType = createStore(rootReducer);
+export let store = createStore(rootReducer, applyMiddleware(thunk));
 
 export type AppRootStateType = ReturnType<typeof rootReducer> // type of state
 export type StoreReduxType = Store & AppRootStateType // type of all store
