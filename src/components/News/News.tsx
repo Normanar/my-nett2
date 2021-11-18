@@ -4,7 +4,7 @@ import g from "./News.module.css"
 export const News = () => {
     return (
         <div className={g.newsBlock}>
-            News is coming
+            News of users
         </div>
     )
 }
