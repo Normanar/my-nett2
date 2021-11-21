@@ -9,7 +9,7 @@ type UsersType = {
     currentPage: number
     totalUsersCount: number
     pageSize: number
-    setNewCurrentPage: (currentPage: number) => void
+    setNewCurrentPage: (currentPage: number, pageSize: number) => void
     items: Array<userItemType>
     follow: (userID: number) => void
     unfollow: (userID: number) => void
@@ -33,7 +33,7 @@ const Users: React.FC<UsersType> = (props) => {
         <div className={g.users}>
             <div className={g.pagination}>
                 {pages.map(p => <button className={props.currentPage === p ? g.selectedPage : g.nonSelectedPage}
-                                        onClick={() => props.setNewCurrentPage(p)}>{p}</button>)}
+                                        onClick={() => props.setNewCurrentPage(p, props.pageSize)}>{p}</button>)}
             </div>
             {
                 props.items.map(u => <div key={u.id} className={g.one_user}>

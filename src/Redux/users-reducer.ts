@@ -157,6 +157,18 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     }
 }
 
+export const setNewCurrentPageThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch<AllActionType>) => {
+        dispatch(toggleIsLoading(true))
+        dispatch(setCurrentPage(currentPage))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items))
+                dispatch(toggleIsLoading(false))
+            });
+    }
+}
+
 
 
 // export const followAC = (userID : number) => {
