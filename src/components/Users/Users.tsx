@@ -48,7 +48,7 @@ const Users: React.FC<UsersType> = (props) => {
                         </NavLink>
                         <div>
                             {u.followed ?
-                                <button disabled={props.isFollowInProgress.some( id => id === u.id)} onClick={() => {
+                                <button disabled={props.isFollowInProgress.some(id => id === u.id)} onClick={() => {
                                     props.toggleIsFollowIn(true, u.id)
                                     // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                     //     withCredentials: true,
@@ -56,7 +56,7 @@ const Users: React.FC<UsersType> = (props) => {
                                     //         "API-KEY": "eaf34c04-f789-4b8a-b729-c59d43de7ca7"
                                     //     }
                                     // })
-                                        usersAPI.unfollowUser(u.id)
+                                    usersAPI.unfollowUser(u.id)
                                         .then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.unfollow(u.id);
@@ -64,14 +64,15 @@ const Users: React.FC<UsersType> = (props) => {
                                             props.toggleIsFollowIn(false, u.id)
                                         });
                                 }} className={g.button_user_follow_unfollow}>UNFOLLOW</button>
-                                : <button disabled={props.isFollowInProgress.some( id => id === u.id)} onClick={() => {
+                                : <button disabled={props.isFollowInProgress.some(id => id === u.id)} onClick={() => {
                                     props.toggleIsFollowIn(true, u.id)
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "eaf34c04-f789-4b8a-b729-c59d43de7ca7"
-                                        }
-                                    })
+                                    // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                    //     withCredentials: true,
+                                    //     headers: {
+                                    //         "API-KEY": "eaf34c04-f789-4b8a-b729-c59d43de7ca7"
+                                    //     }
+                                    // })
+                                    usersAPI.followUser(u.id)
                                         .then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.follow(u.id);
