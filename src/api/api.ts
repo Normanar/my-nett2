@@ -27,4 +27,8 @@ export const usersAPI = {
     getWeatherData() {
         return axios.get('https://api.openweathermap.org/data/2.5/weather?q=Nur-Sultan&appid=0bc81707c4906cfe7a4b8e7c4d7a44db&units=metric')
     },
+
+    unfollowUser(userId: number) {
+        return instance.delete(`follow/${userId}`)
+    }
 }

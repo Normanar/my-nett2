@@ -4,6 +4,7 @@ import {userItemType} from "../../Redux/users-reducer";
 import avatar from "../../images/avatar.png"
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersType = {
     currentPage: number
@@ -49,12 +50,13 @@ const Users: React.FC<UsersType> = (props) => {
                             {u.followed ?
                                 <button disabled={props.isFollowInProgress.some( id => id === u.id)} onClick={() => {
                                     props.toggleIsFollowIn(true, u.id)
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "eaf34c04-f789-4b8a-b729-c59d43de7ca7"
-                                        }
-                                    })
+                                    // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                    //     withCredentials: true,
+                                    //     headers: {
+                                    //         "API-KEY": "eaf34c04-f789-4b8a-b729-c59d43de7ca7"
+                                    //     }
+                                    // })
+                                        usersAPI.unfollowUser(u.id)
                                         .then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.unfollow(u.id);
