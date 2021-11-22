@@ -169,6 +169,33 @@ export const setNewCurrentPageThunkCreator = (currentPage: number, pageSize: num
     }
 }
 
+export const followThunkCreator = (userId : number) => {
+    return (dispatch: Dispatch<AllActionType>) => {
+        dispatch(toggleIsFollowIn(true, userId))
+        usersAPI.followUser(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(follow(userId));
+                }
+                dispatch(toggleIsFollowIn(false, userId))
+            })
+    }
+}
+
+export const unfollowThunkCreator = (userId : number) => {
+    return (dispatch: Dispatch<AllActionType>) => {
+        dispatch(toggleIsFollowIn(true, userId))
+        usersAPI.unfollowUser(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(unfollow(userId));
+                }
+                dispatch(toggleIsFollowIn(false, userId))
+            })
+    }
+}
+
+
 
 
 // export const followAC = (userID : number) => {

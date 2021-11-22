@@ -2,12 +2,12 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {
-    follow,
+    follow, followThunkCreator,
     getUsersThunkCreator,
     initialStateType,
     setNewCurrentPageThunkCreator,
     toggleIsFollowIn,
-    unfollow,
+    unfollow, unfollowThunkCreator,
     userItemType
 } from "../../Redux/users-reducer";
 import React from "react";
@@ -26,6 +26,8 @@ type UsersContainerWithAxiosType = {
     isFollowInProgress: number[]
     getUsers: (currentPage: number, pageSize: number) => void
     setNewCurrentPage: (currentPage: number, pageSize: number) => void
+    followUser: (userId : number) => void
+    unfollowUser: (userId : number) => void
 }
 
 class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosType> {
@@ -56,6 +58,8 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
                          unfollow={this.props.unfollow}
                          isFollowInProgress={this.props.isFollowInProgress}
                          toggleIsFollowIn={this.props.toggleIsFollowIn}
+                         followUser={this.props.followUser}
+                         unfollowUser={this.props.unfollowUser}
 
                 />}
             </>
@@ -82,4 +86,6 @@ export default connect(mapStateToProps, {
     toggleIsFollowIn,
     getUsers: getUsersThunkCreator,
     setNewCurrentPage: setNewCurrentPageThunkCreator,
+    followUser: followThunkCreator,
+    unfollowUser: unfollowThunkCreator,
 })(UsersContainerWithAxios);
