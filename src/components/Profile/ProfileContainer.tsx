@@ -2,21 +2,22 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
-import {initialState, ProfileType, setUserProfile} from "../../Redux/profile-reducer";
-import {Dispatch} from "redux";
-import {RouteComponentProps, withRouter } from "react-router-dom";
-import {usersAPI} from "../../api/api";
+import {getProfileOfUserThunkCreator, ProfileType} from "../../Redux/profile-reducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {stylePreloaderProfileInfo} from "../Preloader/styles for component/stylesOfPreloader";
+import {Preloader} from "../Preloader/Preloader";
 
 type mapStateToPropsProfileType = {
     profile: ProfileType
+    isLoadingProfile: boolean
 }
 
 type mapDispatchToPropsType = {
-    setUserProfile: (profile: ProfileType) => void
+    getUserProfile: (userId: string) => void
 }
 
 type PropsParamsUserIdType = {
-    userId : string
+    userId: string
 }
 
 type ProfileContainerWithAxiosPropsType = mapStateToPropsProfileType & mapDispatchToPropsType
@@ -32,31 +33,22 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
         if (!userID) {
             userID = "19112"
         }
-        usersAPI.getProfileOfUser(userID)
-            .then(data => this.props.setUserProfile(data))
-    }
+        this.props.getUserProfile(userID)
 
-    componentWillUnmount() {
-        this.props.setUserProfile(initialState.profile)
     }
 
     render() {
-        return <Profile profile={this.props.profile}/>;
+        return this.props.isLoadingProfile ? <Preloader style={stylePreloaderProfileInfo}/> : <Profile profile={this.props.profile}/>;
     }
 }
 
-const mapStateToProps = (state: AppRootStateType) : mapStateToPropsProfileType => {
+const mapStateToProps = (state: AppRootStateType): mapStateToPropsProfileType => {
     return {
-        profile: state.profilePage.profile
-    }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToPropsType => {
-    return {
-        setUserProfile : (profile: ProfileType) => dispatch(setUserProfile(profile))
+        profile: state.profilePage.profile,
+        isLoadingProfile: state.profilePage.isLoadingProfile
     }
 }
 
 const ProfileContainerWithAxiosWithRouter = withRouter(ProfileContainerWithAxios)
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainerWithAxiosWithRouter);
+export default connect(mapStateToProps, {getUserProfile: getProfileOfUserThunkCreator})(ProfileContainerWithAxiosWithRouter);

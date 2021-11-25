@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 export type ProfileType = {
     aboutMe: string | null
@@ -33,6 +35,7 @@ export type InitialStateType = {
     posts: Array<postType>
     newMyPost: string
     profile: ProfileType
+    isLoadingProfile: boolean
 }
 
 export let initialState: InitialStateType = {
@@ -77,13 +80,15 @@ export let initialState: InitialStateType = {
             small: null,
             large: null,
         }
-    }
+    },
+    isLoadingProfile: false
 }
 
 type AllActionsType = ReturnType<typeof addNewMyPostAC>
     | ReturnType<typeof updateNewMyPostAC>
     | ReturnType<typeof likeAC>
-    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setUserProfileAC>
+    |ReturnType<typeof toggleIsLoadingProfileAC>
 
 
 export const profileReducer = (state = initialState, action: AllActionsType): InitialStateType => {
@@ -117,6 +122,9 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
         case "SET-PROFILE":
             return {...state, profile : action.profile}
 
+        case "TOGGLE_IS_LOADING_PROFILE":
+            return {...state, isLoadingProfile : action.isLoadingProfile}
+
         default:
             return state;
     }
@@ -143,9 +151,26 @@ export const likeAC = (postID: string, isRedLikeStatus: boolean) => {
     } as const
 }
 
-export const setUserProfile = (profile: ProfileType) => {
+export const setUserProfileAC = (profile: ProfileType) => {
     return {
         type: 'SET-PROFILE',
         profile
     } as const
 }
+
+export const toggleIsLoadingProfileAC = (isLoadingProfile: boolean) => {
+    return {
+        type : "TOGGLE_IS_LOADING_PROFILE",
+        isLoadingProfile
+    } as const
+}
+
+export const getProfileOfUserThunkCreator = (userID: string) => (dispatch: Dispatch) => {
+    dispatch(toggleIsLoadingProfileAC(true))
+    usersAPI.getProfileOfUser(userID)
+        .then(data => {
+            dispatch(setUserProfileAC(data))
+            dispatch(toggleIsLoadingProfileAC(false))
+        })
+}
+
