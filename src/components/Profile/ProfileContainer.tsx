@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
@@ -7,6 +7,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {stylePreloaderProfileInfo} from "../Preloader/styles for component/stylesOfPreloader";
 import {Preloader} from "../Preloader/Preloader";
 import {AuthRedirect} from "../../hoc/AuthRedirect";
+import { compose } from "redux";
 
 type mapStateToPropsProfileType = {
     profile: ProfileType
@@ -50,6 +51,8 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsProfileType =>
     }
 }
 
-const ProfileContainerWithAxiosWithRouter = withRouter(ProfileContainerWithAxios)
-
-export default AuthRedirect(connect(mapStateToProps, {getUserProfile: getProfileOfUserThunkCreator})(ProfileContainerWithAxiosWithRouter));
+export default compose<ComponentType>(
+    AuthRedirect,
+    connect(mapStateToProps, {getUserProfile: getProfileOfUserThunkCreator}),
+    withRouter
+)(ProfileContainerWithAxios)

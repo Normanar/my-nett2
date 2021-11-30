@@ -2,7 +2,6 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import g from "./Dialogs.module.css"
 import DialogUser from "./DialogUser/DialogUser";
 import MessageOne from "./DialogUser/MessageOne";
-import {Redirect} from "react-router-dom";
 
 type OneDialogType = {
     id: string
