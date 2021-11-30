@@ -16,7 +16,6 @@ type UsersType = {
     isFollowInProgress: number[]
     followUser: (userId : number) => void
     unfollowUser: (userId : number) => void
-    isAuth: boolean
 }
 
 const Users: React.FC<UsersType> = (props) => {
@@ -30,8 +29,6 @@ const Users: React.FC<UsersType> = (props) => {
     for (let i = 1; i <= pagesCountWithoutPagination; i++) {
         pages.push(i)
     }
-
-    if (!props.isAuth) return <Redirect to={"/login"} />
 
     return (
         <div className={g.users}>

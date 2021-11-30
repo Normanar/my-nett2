@@ -22,7 +22,6 @@ type mapStateToPropsType = {
     currentPage: number
     isLoading: boolean
     isFollowInProgress: number[]
-    isAuth : boolean
 }
 
 type UsersContainerWithAxiosType = {
@@ -39,7 +38,6 @@ type UsersContainerWithAxiosType = {
     setNewCurrentPage: (currentPage: number, pageSize: number) => void
     followUser: (userId : number) => void
     unfollowUser: (userId : number) => void
-    isAuth : boolean
 }
 
 class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosType> {
@@ -72,7 +70,6 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
                          toggleIsFollowIn={this.props.toggleIsFollowIn}
                          followUser={this.props.followUser}
                          unfollowUser={this.props.unfollowUser}
-                         isAuth={this.props.isAuth}
 
                 />}
             </>
@@ -90,7 +87,6 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading,
         isFollowInProgress: state.usersPage.isFollowInProgress,
-        isAuth: state.auth.isAuth,
     }
 }
 

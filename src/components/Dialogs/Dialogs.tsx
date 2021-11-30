@@ -19,7 +19,6 @@ type DialogsType = {
     newMessage: string
     updateNewMessage: (text: string) => void
     addNewMessage: () => void
-    isAuth: boolean
 }
 
 
@@ -37,8 +36,6 @@ const Dialogs: React.FC<DialogsType> = (props) => {
             props.addNewMessage()
         }
     }
-
-    if (!props.isAuth) return <Redirect to={"/login"} />
 
     return (
         <div className={g.dialogs}>

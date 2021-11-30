@@ -6,11 +6,11 @@ import {getProfileOfUserThunkCreator, ProfileType} from "../../Redux/profile-red
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {stylePreloaderProfileInfo} from "../Preloader/styles for component/stylesOfPreloader";
 import {Preloader} from "../Preloader/Preloader";
+import {AuthRedirect} from "../../hoc/AuthRedirect";
 
 type mapStateToPropsProfileType = {
     profile: ProfileType
     isLoadingProfile: boolean
-    isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -39,7 +39,7 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
     }
 
     render() {
-        return this.props.isLoadingProfile ? <Preloader style={stylePreloaderProfileInfo}/> : <Profile profile={this.props.profile} isAuth={this.props.isAuth}/>;
+        return this.props.isLoadingProfile ? <Preloader style={stylePreloaderProfileInfo}/> : <Profile profile={this.props.profile}/>;
     }
 }
 
@@ -47,10 +47,9 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsProfileType =>
     return {
         profile: state.profilePage.profile,
         isLoadingProfile: state.profilePage.isLoadingProfile,
-        isAuth: state.auth.isAuth,
     }
 }
 
 const ProfileContainerWithAxiosWithRouter = withRouter(ProfileContainerWithAxios)
 
-export default connect(mapStateToProps, {getUserProfile: getProfileOfUserThunkCreator})(ProfileContainerWithAxiosWithRouter);
+export default AuthRedirect(connect(mapStateToProps, {getUserProfile: getProfileOfUserThunkCreator})(ProfileContainerWithAxiosWithRouter));
