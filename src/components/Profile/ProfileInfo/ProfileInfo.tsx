@@ -2,12 +2,14 @@ import React from "react";
 import g from "./ProfileInfo.module.css"
 import {ProfileType} from "../../../Redux/profile-reducer";
 import avatar from "../../../images/avatar.png"
+import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: ProfileType
 }
 
 const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
+
     return (
         <div className={g.profile_info_style}>
             <div className={g.profileInfoDescription}>
@@ -16,10 +18,20 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                          src={props.profile.photos.large === null ? avatar : props.profile.photos.large}/>
                 </div>
                 <div className={g.profileDescription}>
-                    <div>{`Name: ${props.profile.fullName}`}</div>
-                    <div>{`About me: ${props.profile.aboutMe === null ? "in progress..." : props.profile.aboutMe}`}</div>
-                    <div>{`My instagram: ${props.profile.contacts.instagram === null ? "in progress..." : props.profile.contacts.instagram}`}</div>
-                    <div>{`My github: ${props.profile.contacts.github === null ? "in progress..." : props.profile.contacts.github}`}</div>
+                    <div style={ {color : "#24272C"} }>{props.profile.fullName}</div>
+                    <ProfileStatus status={"Status is writing"}/>
+                    <div>
+                        <span style={{color : "#24272C"}}>About me: </span>
+                        <span>{props.profile.aboutMe === null ? "in progress..." : props.profile.aboutMe}</span>
+                    </div>
+                    <div>
+                        <span style={{color : "#24272C"}}>My instagram: </span>
+                        <span>{props.profile.contacts.instagram === null ? "in progress..." : props.profile.contacts.instagram}</span>
+                    </div>
+                    <div>
+                        <span style={{color : "#24272C"}}>My github: </span>
+                        <span>{props.profile.contacts.github === null ? "in progress..." : props.profile.contacts.github}</span>
+                    </div>
                 </div>
             </div>
         </div>

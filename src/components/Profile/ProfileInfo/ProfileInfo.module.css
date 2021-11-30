@@ -1,7 +1,7 @@
 .profileInfoDescription {
     padding: 10px;
     color: #076071;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
     display: flex;
 
@@ -39,5 +39,9 @@
     position:absolute;
     top:-140px;
     left:-330px;
+}
 
+.statusText {
+    color: #24272C;
+    font-style: italic;
 }
