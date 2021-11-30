@@ -2,7 +2,7 @@ import React from "react";
 import g from "./user.module.css"
 import {userItemType} from "../../Redux/users-reducer";
 import avatar from "../../images/avatar.png"
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 type UsersType = {
     currentPage: number
@@ -16,6 +16,7 @@ type UsersType = {
     isFollowInProgress: number[]
     followUser: (userId : number) => void
     unfollowUser: (userId : number) => void
+    isAuth: boolean
 }
 
 const Users: React.FC<UsersType> = (props) => {
@@ -29,6 +30,8 @@ const Users: React.FC<UsersType> = (props) => {
     for (let i = 1; i <= pagesCountWithoutPagination; i++) {
         pages.push(i)
     }
+
+    if (!props.isAuth) return <Redirect to={"/login"} />
 
     return (
         <div className={g.users}>

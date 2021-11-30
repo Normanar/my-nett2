@@ -4,47 +4,34 @@ import {AppRootStateType} from "../../Redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
+type messageType = {
+    id: string
+    message: string
+}
 
-// type DialogsContainerType = {
-//     store: StoreReduxType
-// }
+type dialogType = {
+    id: string
+    name: string
+}
 
-// const DialogsContainer: React.FC = (props) => {
-//
-//     const onChangeNewMessage = (text: string) => {
-//         props.store.dispatch(updateNewMessageAC(text))
-//     }
-//     const onClickAddNewMessage = () => {
-//         props.store.dispatch(addNewMessageAC())
-//     }
-//
-//     const dialogsToDialogsComponent = props.store.getState().dialogsPage.dialogs
-//     const messagesToDialogsComponent = props.store.getState().dialogsPage.messages
-//     const newMessage = props.store.getState().dialogsPage.newMessage
-//
-//
-//     return (
-//         <Dialogs
-//             dialogs={dialogsToDialogsComponent}
-//             messages={messagesToDialogsComponent}
-//             newMessage={newMessage}
-//             updateNewMessage={onChangeNewMessage}
-//             addNewMessage={onClickAddNewMessage}
-//         />
-//     )
-// }
+type mapStateToPropsType = {
+    dialogs: Array<dialogType>
+    messages: Array<messageType>
+    newMessage: string
+    isAuth: boolean
+}
 
 type MapDispatchToProps = {
     updateNewMessage: (text: string) => void
     addNewMessage: () => void
 }
 
-
-let mapStateToProps = (state: AppRootStateType): InitialStateType => {
+let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessage: state.dialogsPage.newMessage
+        newMessage: state.dialogsPage.newMessage,
+        isAuth: state.auth.isAuth,
     }
 }
 

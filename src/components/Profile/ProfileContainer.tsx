@@ -10,6 +10,7 @@ import {Preloader} from "../Preloader/Preloader";
 type mapStateToPropsProfileType = {
     profile: ProfileType
     isLoadingProfile: boolean
+    isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -38,14 +39,15 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
     }
 
     render() {
-        return this.props.isLoadingProfile ? <Preloader style={stylePreloaderProfileInfo}/> : <Profile profile={this.props.profile}/>;
+        return this.props.isLoadingProfile ? <Preloader style={stylePreloaderProfileInfo}/> : <Profile profile={this.props.profile} isAuth={this.props.isAuth}/>;
     }
 }
 
 const mapStateToProps = (state: AppRootStateType): mapStateToPropsProfileType => {
     return {
         profile: state.profilePage.profile,
-        isLoadingProfile: state.profilePage.isLoadingProfile
+        isLoadingProfile: state.profilePage.isLoadingProfile,
+        isAuth: state.auth.isAuth,
     }
 }
 

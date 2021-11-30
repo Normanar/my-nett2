@@ -2,17 +2,28 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {
-    follow, followThunkCreator,
+    follow,
+    followThunkCreator,
     getUsersThunkCreator,
-    initialStateType,
     setNewCurrentPageThunkCreator,
     toggleIsFollowIn,
-    unfollow, unfollowThunkCreator,
+    unfollow,
+    unfollowThunkCreator,
     userItemType
 } from "../../Redux/users-reducer";
 import React from "react";
 import {Preloader} from "../Preloader/Preloader";
 import {stylePreloaderUserContainer} from "../Preloader/styles for component/stylesOfPreloader";
+
+type mapStateToPropsType = {
+    items: Array<userItemType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isLoading: boolean
+    isFollowInProgress: number[]
+    isAuth : boolean
+}
 
 type UsersContainerWithAxiosType = {
     items: Array<userItemType>
@@ -28,6 +39,7 @@ type UsersContainerWithAxiosType = {
     setNewCurrentPage: (currentPage: number, pageSize: number) => void
     followUser: (userId : number) => void
     unfollowUser: (userId : number) => void
+    isAuth : boolean
 }
 
 class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosType> {
@@ -60,6 +72,7 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
                          toggleIsFollowIn={this.props.toggleIsFollowIn}
                          followUser={this.props.followUser}
                          unfollowUser={this.props.unfollowUser}
+                         isAuth={this.props.isAuth}
 
                 />}
             </>
@@ -69,14 +82,15 @@ class UsersContainerWithAxios extends React.Component<UsersContainerWithAxiosTyp
 }
 
 
-const mapStateToProps = (state: AppRootStateType): initialStateType => {
+const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
     return {
         items: state.usersPage.items,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading,
-        isFollowInProgress: state.usersPage.isFollowInProgress
+        isFollowInProgress: state.usersPage.isFollowInProgress,
+        isAuth: state.auth.isAuth,
     }
 }
 
