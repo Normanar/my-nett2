@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 export type ProfileType = {
     aboutMe: string | null
@@ -36,6 +36,7 @@ export type InitialStateType = {
     newMyPost: string
     profile: ProfileType
     isLoadingProfile: boolean
+    profileStatus: string | null
 }
 
 export let initialState: InitialStateType = {
@@ -81,7 +82,8 @@ export let initialState: InitialStateType = {
             large: null,
         }
     },
-    isLoadingProfile: false
+    isLoadingProfile: false,
+    profileStatus: ""
 }
 
 type AllActionsType = ReturnType<typeof addNewMyPostAC>
@@ -89,7 +91,7 @@ type AllActionsType = ReturnType<typeof addNewMyPostAC>
     | ReturnType<typeof likeAC>
     | ReturnType<typeof setUserProfileAC>
     |ReturnType<typeof toggleIsLoadingProfileAC>
-
+    |ReturnType<typeof setProfileStatusAC>
 
 export const profileReducer = (state = initialState, action: AllActionsType): InitialStateType => {
     switch (action.type) {
@@ -124,6 +126,9 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
 
         case "TOGGLE_IS_LOADING_PROFILE":
             return {...state, isLoadingProfile : action.isLoadingProfile}
+
+        case "GET_PROFILE_STATUS":
+            return {...state, profileStatus : action.status}
 
         default:
             return state;
@@ -165,12 +170,35 @@ export const toggleIsLoadingProfileAC = (isLoadingProfile: boolean) => {
     } as const
 }
 
+export const setProfileStatusAC = (status: string) => {
+    return {
+        type : "GET_PROFILE_STATUS",
+        status
+    } as const
+}
+
 export const getProfileOfUserThunkCreator = (userID: string) => (dispatch: Dispatch) => {
     dispatch(toggleIsLoadingProfileAC(true))
     usersAPI.getProfileOfUser(userID)
         .then(data => {
             dispatch(setUserProfileAC(data))
             dispatch(toggleIsLoadingProfileAC(false))
+        })
+}
+
+export const getProfileStatusThunkCreator = (userID: string) => (dispatch: Dispatch) => {
+    profileAPI.getProfileStatus(userID)
+        .then(data => {
+            dispatch(setProfileStatusAC(data))
+        })
+}
+
+export const updateProfileStatusThunkCreator = (status : string) => (dispatch: Dispatch) => {
+    profileAPI.updateProfileStatus(status)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setProfileStatusAC(status))
+            }
         })
 }
 

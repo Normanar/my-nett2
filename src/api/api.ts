@@ -36,3 +36,15 @@ export const usersAPI = {
         return instance.post(`follow/${userId}`)
     },
 }
+
+export const profileAPI = {
+    getProfileStatus(userID: string) {
+        return instance.get(`profile/status/${userID}`)
+            .then(response => response.data)
+    },
+
+    updateProfileStatus(status: string) {
+        return instance.put("profile/status", {status : status})
+            .then(response => response.data)
+    },
+}
