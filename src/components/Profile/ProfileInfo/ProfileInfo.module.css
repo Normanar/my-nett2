@@ -49,3 +49,8 @@
 .profile_status_and_name {
     border-bottom: 1px solid whitesmoke;
 }
+
+.profile_status {
+    color: #24272C;
+    font-style: italic;
+}

@@ -83,7 +83,7 @@ export let initialState: InitialStateType = {
         }
     },
     isLoadingProfile: false,
-    profileStatus: ""
+    profileStatus: null
 }
 
 type AllActionsType = ReturnType<typeof addNewMyPostAC>

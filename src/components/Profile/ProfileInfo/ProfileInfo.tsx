@@ -8,6 +8,7 @@ type ProfileInfoPropsType = {
     profile: ProfileType
     status: string | null
     updateProfileStatus: (status : string) => void
+    currentUserId : number | null
 }
 
 const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
@@ -22,7 +23,11 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                 <div className={g.profileDescription}>
                     <div className={g.profile_status_and_name}>
                         <div style={{color: "#24272C"}}>{props.profile.fullName}</div>
-                        <ProfileStatus status={props.status === null ? "Status is writing" : props.status} updateProfileStatus={props.updateProfileStatus}/>
+                        { props.currentUserId === props.profile.userId
+                            ? <ProfileStatus status={props.status === null ? "Status is writing" : props.status} updateProfileStatus={props.updateProfileStatus}/>
+                            : <div className={g.profile_status}>{props.status === null ? "Status is writing" : props.status}</div>
+                        }
+                        {/*<ProfileStatus status={props.status === null ? "Status is writing" : props.status} updateProfileStatus={props.updateProfileStatus}/>*/}
                     </div>
                     <div>
                         <span style={{color: "#24272C"}}>About me: </span>

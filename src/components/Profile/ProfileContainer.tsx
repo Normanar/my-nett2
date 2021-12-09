@@ -18,6 +18,7 @@ type mapStateToPropsProfileType = {
     profile: ProfileType
     isLoadingProfile: boolean
     profileStatus: string | null
+    currentUserId : number | null
 }
 
 type mapDispatchToPropsType = {
@@ -41,7 +42,8 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
         let userID = this.props.match.params.userId
 
         if (!userID) {
-            userID = "19112"
+            // userID = "19112"
+            userID = this.props.currentUserId + ""
         }
         this.props.getUserProfile(userID)
         this.props.getProfileStatus(userID)
@@ -53,6 +55,7 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
             <Profile profile={this.props.profile}
                      status={this.props.profileStatus}
                      updateProfileStatus={this.props.updateProfileStatus}
+                     currentUserId={this.props.currentUserId}
             />;
     }
 }
@@ -61,7 +64,8 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsProfileType =>
     return {
         profile: state.profilePage.profile,
         isLoadingProfile: state.profilePage.isLoadingProfile,
-        profileStatus: state.profilePage.profileStatus
+        profileStatus: state.profilePage.profileStatus,
+        currentUserId: state.auth.id,
     }
 }
 

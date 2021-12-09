@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import g from "./ProfileInfo.module.css"
 
 type ProfileStatusType = {
@@ -20,6 +20,13 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
         props.updateProfileStatus(localStatus)
     }
 
+    const onKeyPressHandler = (e : KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            setEditStatus(false)
+            props.updateProfileStatus(localStatus)
+        }
+    }
+
     return (
         <div>
             {editStatus
@@ -28,8 +35,9 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
                     onBlur={ blurAction }
                     value={localStatus}
                     onChange={ onChangeHandler }
+                    onKeyPress={ onKeyPressHandler }
                 />
-                : <span className={g.statusText} onDoubleClick={ () => setEditStatus(true)}> {`"${props.status}"`}</span>}
+                : <span className={g.statusText} onDoubleClick={ () => setEditStatus(true)}> {`${props.status}`}</span>}
         </div>
     )
 }
