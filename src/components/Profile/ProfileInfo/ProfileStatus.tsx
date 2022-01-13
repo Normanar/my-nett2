@@ -13,7 +13,7 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
 
     useEffect( () => {
         setLocalStatus(props.status)
-    }, [])
+    }, [props.status])
 
     const onChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(event.currentTarget.value)
