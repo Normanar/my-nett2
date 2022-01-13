@@ -37,6 +37,7 @@ export type InitialStateType = {
     profile: ProfileType
     isLoadingProfile: boolean
     profileStatus: string | null
+    loginUserStatus: string | null
 }
 
 export let initialState: InitialStateType = {
@@ -83,15 +84,17 @@ export let initialState: InitialStateType = {
         }
     },
     isLoadingProfile: false,
-    profileStatus: null
+    profileStatus: null,
+    loginUserStatus: null
 }
 
 type AllActionsType = ReturnType<typeof addNewMyPostAC>
     | ReturnType<typeof updateNewMyPostAC>
     | ReturnType<typeof likeAC>
     | ReturnType<typeof setUserProfileAC>
-    |ReturnType<typeof toggleIsLoadingProfileAC>
-    |ReturnType<typeof setProfileStatusAC>
+    | ReturnType<typeof toggleIsLoadingProfileAC>
+    | ReturnType<typeof setProfileStatusAC>
+    | ReturnType<typeof setLoginUserStatusAC>
 
 export const profileReducer = (state = initialState, action: AllActionsType): InitialStateType => {
     switch (action.type) {
@@ -122,13 +125,16 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
             }
 
         case "SET-PROFILE":
-            return {...state, profile : action.profile}
+            return {...state, profile: action.profile}
 
         case "TOGGLE_IS_LOADING_PROFILE":
-            return {...state, isLoadingProfile : action.isLoadingProfile}
+            return {...state, isLoadingProfile: action.isLoadingProfile}
 
-        case "GET_PROFILE_STATUS":
-            return {...state, profileStatus : action.status}
+        case "SET_PROFILE_STATUS":
+            return {...state, profileStatus: action.status}
+
+        case "SET_LOGIN_USER_STATUS":
+            return {...state, loginUserStatus : action.status}
 
         default:
             return state;
@@ -165,14 +171,21 @@ export const setUserProfileAC = (profile: ProfileType) => {
 
 export const toggleIsLoadingProfileAC = (isLoadingProfile: boolean) => {
     return {
-        type : "TOGGLE_IS_LOADING_PROFILE",
+        type: "TOGGLE_IS_LOADING_PROFILE",
         isLoadingProfile
     } as const
 }
 
 export const setProfileStatusAC = (status: string) => {
     return {
-        type : "GET_PROFILE_STATUS",
+        type: "SET_PROFILE_STATUS",
+        status
+    } as const
+}
+
+export const setLoginUserStatusAC = (status: string) => {
+    return {
+        type: "SET_LOGIN_USER_STATUS",
         status
     } as const
 }
@@ -193,11 +206,27 @@ export const getProfileStatusThunkCreator = (userID: string) => (dispatch: Dispa
         })
 }
 
-export const updateProfileStatusThunkCreator = (status : string) => (dispatch: Dispatch) => {
+export const updateProfileStatusThunkCreator = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateProfileStatus(status)
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(setProfileStatusAC(status))
+            }
+        })
+}
+
+export const getLoginUserStatusThunkCreator = (userID: string) => (dispatch: Dispatch) => {
+    profileAPI.getProfileStatus(userID)
+        .then(data => {
+            dispatch(setLoginUserStatusAC(data))
+        })
+}
+
+export const updateLoginUserStatusThunkCreator = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateProfileStatus(status)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setLoginUserStatusAC(status))
             }
         })
 }

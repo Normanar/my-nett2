@@ -1,9 +1,9 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from "react";
 import g from "./ProfileInfo.module.css"
 
 type ProfileStatusType = {
     status: string
-    updateProfileStatus: (status : string) => void
+    updateLoginUserStatus: (status : string) => void
 }
 
 export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
@@ -11,19 +11,23 @@ export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
     const [editStatus, setEditStatus] = useState<boolean>(false)
     const [localStatus, setLocalStatus] = useState<string>(props.status)
 
+    useEffect( () => {
+        setLocalStatus(props.status)
+    }, [])
+
     const onChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(event.currentTarget.value)
     }
 
     const blurAction = () => {
         setEditStatus(false)
-        props.updateProfileStatus(localStatus)
+        props.updateLoginUserStatus(localStatus)
     }
 
     const onKeyPressHandler = (e : KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             setEditStatus(false)
-            props.updateProfileStatus(localStatus)
+            props.updateLoginUserStatus(localStatus)
         }
     }
 

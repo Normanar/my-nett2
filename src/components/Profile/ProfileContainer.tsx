@@ -3,9 +3,10 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redux/redux-store";
 import {
+    getLoginUserStatusThunkCreator,
     getProfileOfUserThunkCreator,
     getProfileStatusThunkCreator,
-    ProfileType,
+    ProfileType, updateLoginUserStatusThunkCreator,
     updateProfileStatusThunkCreator
 } from "../../Redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -19,12 +20,15 @@ type mapStateToPropsProfileType = {
     isLoadingProfile: boolean
     profileStatus: string | null
     currentUserId : number | null
+    loginUserStatus : string | null
 }
 
 type mapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getProfileStatus: (userId: string) => void
     updateProfileStatus: (status : string) => void
+    getLoginUserStatus: (userId: string) => void
+    updateLoginUserStatus: (status : string) => void
 }
 
 type PropsParamsUserIdType = {
@@ -47,8 +51,11 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
         }
         this.props.getUserProfile(userID)
         this.props.getProfileStatus(userID)
+        this.props.getLoginUserStatus(this.props.currentUserId + "")
+
 
     }
+
 
     render() {
         return this.props.isLoadingProfile ? <Preloader style={stylePreloaderProfileInfo}/> :
@@ -56,6 +63,8 @@ class ProfileContainerWithAxios extends React.Component<AllPropsType> {
                      status={this.props.profileStatus}
                      updateProfileStatus={this.props.updateProfileStatus}
                      currentUserId={this.props.currentUserId}
+                     loginUserStatus={this.props.loginUserStatus}
+                     updateLoginUserStatus={this.props.updateLoginUserStatus}
             />;
     }
 }
@@ -66,15 +75,18 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsProfileType =>
         isLoadingProfile: state.profilePage.isLoadingProfile,
         profileStatus: state.profilePage.profileStatus,
         currentUserId: state.auth.id,
+        loginUserStatus : state.profilePage.loginUserStatus
     }
 }
 
 export default compose<ComponentType>(
-    AuthRedirect,
+    // AuthRedirect,
     connect(mapStateToProps, {
         getUserProfile: getProfileOfUserThunkCreator,
         getProfileStatus: getProfileStatusThunkCreator,
         updateProfileStatus: updateProfileStatusThunkCreator,
+        getLoginUserStatus : getLoginUserStatusThunkCreator,
+        updateLoginUserStatus : updateLoginUserStatusThunkCreator,
     }),
     withRouter
 )(ProfileContainerWithAxios)

@@ -9,6 +9,8 @@ type ProfilePropsType = {
     status: string | null
     updateProfileStatus: (status : string) => void
     currentUserId : number | null
+    loginUserStatus : string | null
+    updateLoginUserStatus: (status : string) => void
 }
 
 const Profile: React.FC<ProfilePropsType> = (props) => {
