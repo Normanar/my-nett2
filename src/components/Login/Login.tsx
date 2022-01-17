@@ -4,7 +4,9 @@ import * as yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {usersAPI} from "../../api/api";
 import {setAuthUserReducerAC} from "../../Redux/auth-reducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {Redirect} from "react-router-dom";
+import {AppRootStateType} from "../../Redux/redux-store";
 
 type MyFormValues = {
     email: string
@@ -12,8 +14,11 @@ type MyFormValues = {
     rememberMe: boolean
 }
 
+
+
 export const Login = () => {
     const dispatch = useDispatch()
+    const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
 
     const initialValues: MyFormValues = {
         email: "",
@@ -25,6 +30,8 @@ export const Login = () => {
         email: yup.string().email("Please enter a valid email address").required("Required"),
         password: yup.string().required("Required")
     })
+
+    if (isAuth) return <Redirect to={"/profile"}/>
 
     return (
         <div className={g.loginBlock}>
