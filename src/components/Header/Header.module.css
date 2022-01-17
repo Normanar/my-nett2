@@ -36,5 +36,16 @@
 }
 
 .sign_out{
-    width: 30px;
+    margin-right: 10px;
+    color: white;
+    font-weight: bold;
+    border : 1px solid white;
+    border-radius: 3px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.sign_out:hover {
+    color: #24272C;
+    background-color: #cccccc;
 }
