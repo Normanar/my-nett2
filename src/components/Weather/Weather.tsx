@@ -38,7 +38,7 @@ function Weather(props: WeatherPropsType) {
                 <div className={g.temp}>{Math.round(props.temp)}&deg;</div>
                 <div>Feels like: {Math.round(props.feels_like)}&deg;</div>
                 <div>{props.main}</div>
-                <img alt={"icon of weather"} src={`https://openweathermap.org/img/w/${props.icon}.png`}/>
+                <img alt={"icon of weather"} src={`https://openweathermap.org/img/wn/${props.icon}.png`}/>
             </div>
         }
         </>

@@ -47,3 +47,19 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
             }
         })
 }
+////////////////////////////////////////////////////////////////////////////
+
+export const postLogin = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    usersAPI.logIn(email, password, rememberMe)
+        .then(data => {
+            if (data.resultCode === 0) {
+                usersAPI.isLoginIn()
+                    .then(data => {
+                        if (data.resultCode === 0) {
+                            let {id, login, email} = data.data
+                            dispatch(setAuthUserReducerAC(id, login, email))
+                        }
+                    })
+            }
+        })
+}

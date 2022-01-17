@@ -80,7 +80,7 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsProfileType =>
 }
 
 export default compose<ComponentType>(
-    // AuthRedirect,
+    AuthRedirect,
     connect(mapStateToProps, {
         getUserProfile: getProfileOfUserThunkCreator,
         getProfileStatus: getProfileStatusThunkCreator,

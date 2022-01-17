@@ -19,7 +19,7 @@ function HeaderContainerWithAxios(props: HeaderContainerWithAxiosPropsType) {
 
     useEffect(() => {
         props.getAuthUserData()
-    }, [])
+    }, [props.isAuth])
 
     return (
         <Header {...props}/>

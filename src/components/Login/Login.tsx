@@ -1,7 +1,10 @@
 import React from "react";
 import g from "./Login.module.css";
 import * as yup from "yup";
-import {Field, Form, Formik, ErrorMessage} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+import {usersAPI} from "../../api/api";
+import {setAuthUserReducerAC} from "../../Redux/auth-reducer";
+import {useDispatch} from "react-redux";
 
 type MyFormValues = {
     email: string
@@ -10,6 +13,7 @@ type MyFormValues = {
 }
 
 export const Login = () => {
+    const dispatch = useDispatch()
 
     const initialValues: MyFormValues = {
         email: "",
@@ -29,7 +33,18 @@ export const Login = () => {
                 initialValues={initialValues}
                 validationSchema={validation}
                 onSubmit={(values, actions) => {
-                    console.log(values);
+                    usersAPI.logIn(values.email, values.password, values.rememberMe)
+                        .then(data => {
+                            if (data.resultCode === 0) {
+                                usersAPI.isLoginIn()
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
+                                            let {id, login, email} = data.data
+                                            dispatch(setAuthUserReducerAC(id, login, email))
+                                        }
+                                    })
+                            }
+                        })
                     actions.setSubmitting(false);
                 }}
             >
@@ -53,7 +68,7 @@ export const Login = () => {
                                 name="password"
                                 placeholder={"Password"}
                             />
-                            <ErrorMessage name="password" component="div" className={g.error}/>
+                            <ErrorMessage name="password" component="span" className={g.error}/>
                         </div>
                         <div>
                             <Field

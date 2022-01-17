@@ -3,4 +3,22 @@
     background-color: darkgrey;
     height: 100%;
     border-radius: 5px;
+    padding-left: 200px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+.field {
+
+}
+
+.field_error {
+    outline: none;
+    border-color: red;
 }

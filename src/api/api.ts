@@ -35,6 +35,11 @@ export const usersAPI = {
     followUser(userId: number) {
         return instance.post(`follow/${userId}`)
     },
+
+    logIn(email: string, password: string, rememberMe: boolean) {
+        return instance.post('auth/login', {email: email, password: password, rememberMe})
+            .then(response => response.data)
+    }
 }
 
 export const profileAPI = {
