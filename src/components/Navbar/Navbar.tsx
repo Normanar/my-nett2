@@ -22,9 +22,9 @@ const Navbar = () => {
                 <div>
                     <NavLink to="/music" activeClassName={g.activeLink}>Music</NavLink>
                 </div>
-                <div>
-                    <NavLink to="/settings" activeClassName={g.activeLink}>Settings</NavLink>
-                </div>
+                {/*<div>*/}
+                {/*    <NavLink to="/settings" activeClassName={g.activeLink}>Settings</NavLink>*/}
+                {/*</div>*/}
                 <Weather/>
             </nav>
 
