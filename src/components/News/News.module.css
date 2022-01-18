@@ -1,4 +1,15 @@
 .newsBlock {
     background-color: #BFBFBD;
     color: #24272C;
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.code {
+    font-size: 100px;
+    font-weight: bold;
 }
