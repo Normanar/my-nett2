@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import g from "./Login.module.css";
 import * as yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -15,16 +15,18 @@ type MyFormValues = {
 }
 
 
-
 export const Login = () => {
     const dispatch = useDispatch()
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
+    const [wrongLogin, setWrongLogin] = useState<boolean>(false)
 
     const initialValues: MyFormValues = {
         email: "",
         password: "",
         rememberMe: false
     };
+
+    const onClickHandler = () => setWrongLogin(false)
 
     const validation = yup.object().shape({
         email: yup.string().email("Please enter a valid email address").required("Required"),
@@ -43,6 +45,7 @@ export const Login = () => {
                     usersAPI.logIn(values.email, values.password, values.rememberMe)
                         .then(data => {
                             if (data.resultCode === 0) {
+                                setWrongLogin(false)
                                 usersAPI.isLoginIn()
                                     .then(data => {
                                         if (data.resultCode === 0) {
@@ -50,6 +53,8 @@ export const Login = () => {
                                             dispatch(setAuthUserReducerAC(id, login, email))
                                         }
                                     })
+                            } else {
+                                setWrongLogin(true)
                             }
                         })
                     actions.setSubmitting(false);
@@ -66,6 +71,7 @@ export const Login = () => {
                                 type="email"
                                 name="email"
                                 placeholder={"Email"}
+                                onFocus={onClickHandler}
                             />
                             <ErrorMessage name="email" component="span" className={g.error}/>
                         </div>
@@ -74,19 +80,23 @@ export const Login = () => {
                                 type="password"
                                 name="password"
                                 placeholder={"Password"}
+                                onFocus={onClickHandler}
                             />
                             <ErrorMessage name="password" component="span" className={g.error}/>
                         </div>
-                        <div>
+                        <div className={g.rememberMe}>
                             <Field
                                 type="checkbox"
                                 name="rememberMe"
                             />
+                            <span>remember me</span>
                         </div>
-                        <div>
+                        <div className={g.submit}>
                             <button type="submit" disabled={!isValid || isSubmitting || !dirty}>
                                 Submit
                             </button>
+                            {wrongLogin ?
+                                <span className={g.wrong}>Something wrong with email or password</span> : null}
                         </div>
                     </Form>
                 )}

@@ -22,3 +22,18 @@
     outline: none;
     border-color: red;
 }
+
+.wrong {
+    margin-left: 20px;
+    color: red;
+    border: 1px solid red;
+    padding: 2px;
+}
+
+.submit {
+    margin-top: 10px;
+}
+
+.rememberMe {
+    margin-top: 10px;
+}
