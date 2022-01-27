@@ -26,7 +26,7 @@ const Dialogs: React.FC<DialogsType> = (props) => {
 
     return (
         <div className={g.dialogs}>
-            <NavLink to={"/messages/628"}>
+            <NavLink to={"/628"}>
             <DialogUser name={"Sarah"} id={"628"}/>
             </NavLink>
             <DialogUser name={"Sarah"} id={"1"}/>

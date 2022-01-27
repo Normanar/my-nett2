@@ -1,15 +1,34 @@
 import React from "react";
-import g from "../Dialogs.module.css"
-
-type MessageOneType = {
-    message: string,
-
-}
+import g from "./Message.module.css"
+import ava1 from "../../../images/150.jpg";
 
 
-const MessageOne: React.FC<MessageOneType> = (props) => {
+const MessageOne = () => {
     return (
-        <div className={g.messageOne}>{props.message}</div>
+        <div className={g.message_block}>
+            <div className={g.message_one}>
+                <div className={g.message_avatar}>
+                    <img src={ava1} alt={"user"}/>
+                </div>
+                <div className={g.message_text}>
+                    <div className={g.name}>Sarah</div>
+                    <div className={g.text}>
+                        Don't Look a Gift Horse In The Mouth!!!!!!!!!!!!!!
+                    </div>
+                </div>
+            </div>
+            <div className={g.message_two}>
+                <div className={g.message_text_two}>
+                    <div className={g.name_two}>You</div>
+                    <div className={g.text_two}>
+                        Don't Look a Gift Horse In The Mouth!!!!!!!!!!!!!!
+                    </div>
+                </div>
+                <div className={g.message_avatar}>
+                    <img src={ava1} alt={"user"}/>
+                </div>
+            </div>
+        </div>
     )
 }
 

@@ -9,6 +9,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Login} from "./components/Login/Login";
+import MessageOne from "./components/Dialogs/DialogUser/MessageOne";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                     <Route path={"/login"} render={() => <Login/>}/>
+                    <Route path={"/628"} render={() => <MessageOne/>}/>
                     <Redirect from='/' to='/profile'/>
                 </div>
             </div>
