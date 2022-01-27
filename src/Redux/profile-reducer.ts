@@ -120,6 +120,7 @@ export const profileReducer = (state = initialState, action: AllActionsType): In
         case "SET-LIKE":
             return {
                 ...state, posts: state.posts.map(p => (
+                    // p.id === action.postID ? {...p, isRedLike: action.isRedLikeStatus} : p
                     p.id === action.postID ? {...p, isRedLike: action.isRedLikeStatus} : p
                 ))
             }
@@ -153,6 +154,14 @@ export const updateNewMyPostAC = (newText: string) => {
         newText: newText,
     } as const
 }
+
+// export const likeAC = (postID: string, isRedLikeStatus: boolean) => {
+//     return {
+//         type: 'SET-LIKE',
+//         postID,
+//         isRedLikeStatus,
+//     } as const
+// }
 
 export const likeAC = (postID: string, isRedLikeStatus: boolean) => {
     return {

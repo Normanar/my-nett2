@@ -1,26 +1,9 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-    background-color: #BFBFBD;
+    /*display: grid;*/
+    /*grid-template-columns: 2fr 10fr;*/
+    /*background-color: #BFBFBD;*/
 }
 
-.dialogsItems {
-    padding: 10px;
-}
-.dialogsItems a {
+.dialogs a{
     text-decoration: none;
-    color: green;
-}
-
-.dialogsItems a.active {
-    color: black;
-}
-
-
-.dialogsMessageAll {
-    padding: 10px;
-}
-
-.messageOne {
-
 }

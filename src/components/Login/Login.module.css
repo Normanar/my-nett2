@@ -7,6 +7,8 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    /*background-image: url("https://images.wallpaperscraft.ru/image/single/galaktika_svechenie_spiral_142698_1920x1080.jpg");*/
+    /*background-position: center;*/
 }
 
 .error {

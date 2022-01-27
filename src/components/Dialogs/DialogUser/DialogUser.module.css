@@ -1,4 +1,49 @@
 .dialogUser {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #BFBFBD;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.avatar img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.dialogUserText {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.name {
+    color: #24272C;
+    font-weight: bold;
+}
+
+.text {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.text::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 20px solid white;
+    border-bottom: 10px solid transparent;
+    top: 20%;
+    left: -20px;
+    z-index: 1;
 
 }
 

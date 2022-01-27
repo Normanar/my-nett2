@@ -52,9 +52,11 @@
 .like{
     display: flex;
     justify-content: end;
-    color: #1698AE;
+    /*color: #1698AE;*/
     font-size: 12px;
     margin-top: 5px;
+    color: black;
+    font-weight: bold;
 
 }
 
