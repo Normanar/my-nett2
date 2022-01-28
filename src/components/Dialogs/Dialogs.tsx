@@ -1,8 +1,12 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import {NavLink} from "react-router-dom";
 import g from "./Dialogs.module.css"
 import DialogUser from "./DialogUser/DialogUser";
 import MessageOne from "./DialogUser/MessageOne";
+import ava1 from "../../images/150.jpg"
+import ava2 from "../../images/151.jpg"
+import ava3 from "../../images/152.jpg"
+import ava4 from "../../images/153.jpg"
 
 type OneDialogType = {
     id: string
@@ -27,16 +31,22 @@ const Dialogs: React.FC<DialogsType> = (props) => {
     return (
         <div className={g.dialogs}>
             <NavLink to={"/628"}>
-            <DialogUser name={"Sarah"} id={"628"}/>
+                <DialogUser name={"Sarah"} id={"628"} src={ava1}/>
             </NavLink>
-            <DialogUser name={"Emma"} id={"700"}/>
+            <NavLink to={"/628"}>
+                <DialogUser name={"Emma"} id={"629"} src={ava2}/>
+            </NavLink>
+            <NavLink to={"/628"}>
+                <DialogUser name={"Henry"} id={"630"} src={ava3}/>
+            </NavLink>
+            <NavLink to={"/628"}>
+                <DialogUser name={"Dave"} id={"631"} src={ava4}/>
+            </NavLink>
         </div>
     )
 }
 
 export default Dialogs;
-
-
 
 
 // return (
@@ -54,8 +64,6 @@ export default Dialogs;
 //         </div>
 //     </div>
 // )
-
-
 
 
 // const onChangeNewMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {

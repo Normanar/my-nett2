@@ -49,6 +49,10 @@ const MessageOne = () => {
 
             <MessageTwoText/>
             <MessageTwoText/>
+            <div className={g.textSendArea}>
+            <textarea placeholder={"Type your message..."} className={g.textArea}></textarea>
+            <button className={g.button}>Send</button>
+            </div>
         </div>
     )
 }

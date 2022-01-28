@@ -45,7 +45,7 @@ export const Login = () => {
 
     return (
         <div className={g.loginBlock}>
-            <div>Login</div>
+            <div className={g.login}>Login</div>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validation}
@@ -81,6 +81,7 @@ export const Login = () => {
                                     name="email"
                                     placeholder={"Email"}
                                     onFocus={onClickHandler}
+                                    className={g.field}
                                 /><br/>
                                 <span style={ {color : "darkgrey"} }>.</span>
                                 <ErrorMessage name="email" component="span" className={g.error}/>
@@ -91,6 +92,7 @@ export const Login = () => {
                                     name="password"
                                     placeholder={"Password"}
                                     onFocus={onClickHandler}
+                                    className={g.field}
                                 />
                                 <input type={"checkbox"} checked={checked} onClick={ onClickChecked }/>
                                 <span>show the password</span>
