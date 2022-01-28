@@ -20,17 +20,14 @@ export type InitialStateType = {
 
 let initialState: InitialStateType = {
     dialogs: [
-        {id: v1(), name: "Nick"},
-        {id: v1(), name: "John"},
-        {id: v1(), name: "Nicole"},
-        {id: v1(), name: "Paul"},
+        {id: v1(), name: "Sarah"},
+        {id: v1(), name: "Emma"},
+        {id: v1(), name: "Henry"},
+        {id: v1(), name: "Dave"},
 
     ],
     messages: [
-        {id: v1(), message: "Hi ! Hi !"},
-        {id: v1(), message: "What are you doing?"},
-        {id: v1(), message: "React! React! React! React! React! "},
-        {id: v1(), message: "Yo Yo Yo"},
+        {id: v1(), message: "We’re on time. Don’t panic."},
     ],
     newMessage: '',
 }

@@ -17,7 +17,7 @@ const DialogUser: React.FC<DialogUserType> = (props) => {
             </div>
             <div className={g.dialogUserText}>
                 <div className={g.name}>{props.name}</div>
-                <div className={g.text}>Don't Look a Gift Horse In The Mouth!</div>
+                <div className={g.text}>What time is it? We’re going to be late!</div>
             </div>
         </div>
     )
