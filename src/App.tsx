@@ -19,13 +19,13 @@ function App() {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path={"/messages"} render={() => <DialogsContainer/>}/>
+                    <Route exact path={"/messages"} render={() => <DialogsContainer/>}/>
                     <Route path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
                     <Route path={"/users"} render={() => <UsersContainer/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                     <Route path={"/login"} render={() => <Login/>}/>
-                    <Route path={"/628"} render={() => <MessageOne/>}/>
+                    <Route exact path={"/messages/:userId"} render={() => <MessageOne/>}/>
                     <Redirect from='/' to='/profile'/>
                 </div>
             </div>

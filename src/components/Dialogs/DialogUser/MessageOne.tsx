@@ -1,16 +1,28 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import g from "./Message.module.css"
-import ava1 from "../../../images/150.jpg";
 import myAva from "../../../images/avatar.png"
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../Redux/redux-store";
 import {addNewMessageAC, InitialStateType, updateNewMessageAC} from "../../../Redux/dialogs-reducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import ava628 from "../../../images/150.jpg"
+import ava629 from "../../../images/151.jpg"
+import ava630 from "../../../images/152.jpg"
+import ava631 from "../../../images/153.jpg"
 
-type MessageTwoText = {
+type MessageTwoTextType = {
     text : string
 }
 
-const MessageTwoText : React.FC<MessageTwoText> = (props) => {
+type PropsParamsUserIdType = {
+    userId: string
+}
+
+
+type MessageOneAllPropsType = RouteComponentProps<PropsParamsUserIdType>
+
+const MessageTwoText : React.FC<MessageTwoTextType> = (props) => {
+
     return (
         <div className={g.message_two}>
             <div className={g.message_text_two}>
@@ -27,7 +39,7 @@ const MessageTwoText : React.FC<MessageTwoText> = (props) => {
 }
 
 
-const MessageOne = () => {
+const MessageOne : React.FC<MessageOneAllPropsType> = (props) => {
 
     const dialogs = useSelector<AppRootStateType, InitialStateType>(state => state.dialogsPage)
     const dispatch = useDispatch()
@@ -47,12 +59,15 @@ const MessageOne = () => {
             dispatch(updateNewMessageAC(''))
         }
     }
+    const userId = props.match.params.userId
+
+    const userPhoto = userId === "628" ? ava628 : userId === "629" ? ava629 : userId === "630" ? ava630 : userId === "631" ? ava631 : ""
 
     return (
         <div className={g.message_block}>
             <div className={g.message_one}>
                 <div className={g.message_avatar}>
-                    <img src={ava1} alt={"user"}/>
+                    <img src={userPhoto} alt={"user"}/>
                 </div>
                 <div className={g.message_text}>
                     <div className={g.name}>Sarah</div>
@@ -89,8 +104,9 @@ const MessageOne = () => {
                 onClick={onClickButton}
             >Send</button>
             </div>
+            {console.log(props.match.params.userId)}
         </div>
     )
 }
 
-export default MessageOne;
+export default withRouter(MessageOne);
