@@ -29,7 +29,7 @@ const Dialogs: React.FC<DialogsType> = (props) => {
             <NavLink to={"/628"}>
             <DialogUser name={"Sarah"} id={"628"}/>
             </NavLink>
-            <DialogUser name={"Sarah"} id={"1"}/>
+            <DialogUser name={"Emma"} id={"700"}/>
         </div>
     )
 }

@@ -16,10 +16,6 @@
     font-size: 14px;
 }
 
-.field {
-
-}
-
 .field_error {
     outline: none;
     border-color: red;
@@ -33,9 +29,5 @@
 }
 
 .submit {
-    margin-top: 10px;
-}
-
-.rememberMe {
     margin-top: 10px;
 }

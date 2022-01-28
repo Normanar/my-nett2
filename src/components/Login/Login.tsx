@@ -26,6 +26,14 @@ export const Login = () => {
         rememberMe: false
     };
 
+    const [checked, setChecked] = useState<boolean>(false)
+
+    const onClickChecked = () => {
+        setChecked(!checked)
+    }
+
+    let showPassword = checked ? "text" : "password"
+
     const onClickHandler = () => setWrongLogin(false)
 
     const validation = yup.object().shape({
@@ -66,25 +74,32 @@ export const Login = () => {
                       isValid,
                   }) => (
                     <Form>
-                        <div>
-                            <Field
-                                type="email"
-                                name="email"
-                                placeholder={"Email"}
-                                onFocus={onClickHandler}
-                            />
-                            <ErrorMessage name="email" component="span" className={g.error}/>
+                        <div className={g.field}>
+                            <div>
+                                <Field
+                                    type="email"
+                                    name="email"
+                                    placeholder={"Email"}
+                                    onFocus={onClickHandler}
+                                /><br/>
+                                <span style={ {color : "darkgrey"} }>.</span>
+                                <ErrorMessage name="email" component="span" className={g.error}/>
+                            </div>
+                            <div>
+                                <Field
+                                    type={showPassword}
+                                    name="password"
+                                    placeholder={"Password"}
+                                    onFocus={onClickHandler}
+                                />
+                                <input type={"checkbox"} checked={checked} onClick={ onClickChecked }/>
+                                <span>show the password</span>
+                                <br/>
+                                <span style={ {color : "darkgrey"} }>.</span>
+                                <ErrorMessage name="password" component="span" className={g.error}/>
+                            </div>
                         </div>
                         <div>
-                            <Field
-                                type="password"
-                                name="password"
-                                placeholder={"Password"}
-                                onFocus={onClickHandler}
-                            />
-                            <ErrorMessage name="password" component="span" className={g.error}/>
-                        </div>
-                        <div className={g.rememberMe}>
                             <Field
                                 type="checkbox"
                                 name="rememberMe"
