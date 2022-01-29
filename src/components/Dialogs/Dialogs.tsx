@@ -2,31 +2,30 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import g from "./Dialogs.module.css"
 import DialogUser from "./DialogUser/DialogUser";
-import MessageOne from "./DialogUser/MessageOne";
 import ava1 from "../../images/150.jpg"
 import ava2 from "../../images/151.jpg"
 import ava3 from "../../images/152.jpg"
 import ava4 from "../../images/153.jpg"
 
-type OneDialogType = {
-    id: string
-    name: string
-}
-type OneMessageType = {
-    id: string
-    message: string
-}
+// type OneDialogType = {
+//     id: string
+//     name: string
+// }
+// type OneMessageType = {
+//     id: string
+//     message: string
+// }
 
-type DialogsType = {
-    dialogs: Array<OneDialogType>
-    messages: Array<OneMessageType>
-    newMessage: string
-    updateNewMessage: (text: string) => void
-    addNewMessage: () => void
-}
+// type DialogsType = {
+//     dialogs: Array<OneDialogType>
+//     messages: Array<OneMessageType>
+//     newMessage: string
+//     updateNewMessage: (text: string) => void
+//     addNewMessage: () => void
+// }
 
 
-const Dialogs: React.FC<DialogsType> = (props) => {
+const Dialogs: React.FC = () => {
 
     return (
         <div className={g.dialogs}>

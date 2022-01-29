@@ -63,6 +63,8 @@ const MessageOne : React.FC<MessageOneAllPropsType> = (props) => {
 
     const userPhoto = userId === "628" ? ava628 : userId === "629" ? ava629 : userId === "630" ? ava630 : userId === "631" ? ava631 : ""
 
+    const userName = userId === "628" ? "Sarah" : userId === "629" ? "Emma" : userId === "630" ? "Henry" : userId === "631" ? "Dave" : ""
+
     return (
         <div className={g.message_block}>
             <div className={g.message_one}>
@@ -70,7 +72,7 @@ const MessageOne : React.FC<MessageOneAllPropsType> = (props) => {
                     <img src={userPhoto} alt={"user"}/>
                 </div>
                 <div className={g.message_text}>
-                    <div className={g.name}>Sarah</div>
+                    <div className={g.name}>{userName}</div>
                     <div className={g.text}>
                         What time is it? We’re going to be late!
                     </div>
