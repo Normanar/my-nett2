@@ -10,6 +10,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Login} from "./components/Login/Login";
 import MessageOne from "./components/Dialogs/DialogUser/MessageOne";
+import {Game} from "./components/Game/Game";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                     <Route path={"/users"} render={() => <UsersContainer/>}/>
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
+                    <Route path={"/game"} render={() => <Game/>}/>
                     <Route path={"/login"} render={() => <Login/>}/>
                     <Route exact path={"/messages/:userId"} render={() => <MessageOne/>}/>
                     <Redirect from='/' to='/profile'/>
