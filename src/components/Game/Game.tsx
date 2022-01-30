@@ -12,10 +12,10 @@ export function Game () {
     const [showWin, setShowWin] = useState<boolean>(false)
     const [round, setRound] = useState(0)
 
-    const countOfRound = round < 20
+    const countOfRound = round < 5
 
     const onClickStartButton = () => {
-        setNum(Math.floor(Math.random() * 10) + 1)
+        setNum(Math.floor(Math.random() * 100) + 1)
         setShow(true)
         setShowWin(false)
     }
