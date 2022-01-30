@@ -2,8 +2,16 @@
     background-color: #BFBFBD;
     border-radius: 5px;
     color : #24272C;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
 }
 
 .game_container {
-    background-color: #cccccc;
+    /*background-color: whitesmoke;*/
+    width: 60%;
+    margin-top: 70px;
+    height: 120px;
 }
