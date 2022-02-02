@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import g from "./Game.module.css"
 
 
@@ -16,7 +16,7 @@ export function Game() {
     const countOfRound = round < 5
 
     const onClickStartButton = () => {
-        setNum(Math.floor(Math.random() * 100) + 1)
+        setNum(Math.floor(Math.random() * 50) + 1)
         setShow(true)
         setShowWin(false)
         setShowLose(false)
@@ -27,20 +27,54 @@ export function Game() {
         setNumOfPlayer(e.target.value)
     }
 
+    const onKeyPressInput = (e : KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            if (num === +numOfPlayer) {
+                setShowWin(true)
+                setNumOfPlayer('')
+                setShowMore(false)
+                setShowLess(false)
+                setShow(false)
+            } else if (round >= 4) {
+                setShowLose(true)
+                setNumOfPlayer('')
+                setShowMore(false)
+                setShowLess(false)
+                setShow(false)
+            } else if (num > +numOfPlayer) {
+                setShowMore(true)
+                setShowLess(false)
+                setNumOfPlayer('')
+                setRound(round + 1)
+            } else {
+                setShowLess(true)
+                setShowMore(false)
+                setNumOfPlayer('')
+                setRound(round + 1)
+            }
+        }
+    }
+
 
     const onClickButtonGo = () => {
         if (num === +numOfPlayer) {
             setShowWin(true)
             setNumOfPlayer('')
+            setShowMore(false)
+            setShowLess(false)
         } else if (round >= 4) {
             setShowLose(true)
             setNumOfPlayer('')
+            setShowMore(false)
+            setShowLess(false)
         } else if (num > +numOfPlayer) {
             setShowMore(true)
+            setShowLess(false)
             setNumOfPlayer('')
             setRound(round + 1)
         } else {
             setShowLess(true)
+            setShowMore(false)
             setNumOfPlayer('')
             setRound(round + 1)
         }
@@ -58,7 +92,7 @@ export function Game() {
         <div className={g.game_block}>
             <div className={g.game_container}>
                 <div>Game</div>
-                <div>You need to guess the given number: from 1 to 100. You have five attempts.</div>
+                <div>You need to guess the given number: from 1 to 50. You have five attempts.</div>
                 <button onClick={onClickStartButton}>New game</button>
                 {num}
                 <div>
@@ -68,10 +102,11 @@ export function Game() {
                         onChange={onChangeInput}
                         onFocus={onFocusInput}
                         className={g.input}
+                        onKeyPress={onKeyPressInput}
                     />}
                     {show && <button onClick={onClickButtonGo}>Go</button>}
-                    {showMore && countOfRound && <div>More</div>}
-                    {showLess && countOfRound && <div>Less</div>}
+                    {showMore && <div>More</div>}
+                    {showLess && <div>Less</div>}
                     {showWin && countOfRound && <div>You win!</div>}
                     {showLose && <div>{`Maybe next time! It was ${num}`}</div>}
                 </div>
