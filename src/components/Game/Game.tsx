@@ -17,10 +17,12 @@ export function Game() {
 
     const onClickStartButton = () => {
         setNum(Math.floor(Math.random() * 50) + 1)
-        setShow(true)
+        // setShow(true)
         setShowWin(false)
         setShowLose(false)
         setRound(0)
+        setShow(false)
+        setTimeout(() => setShow(true), 500)
     }
 
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +96,7 @@ export function Game() {
                 <div>Game</div>
                 <div>You need to guess the given number: from 1 to 50. You have five attempts.</div>
                 <button onClick={onClickStartButton}>New game</button>
-                {num}
+                {/*{num}*/}
                 <div>
                     {show && <input
                         type={"text"}
@@ -107,7 +109,7 @@ export function Game() {
                     {show && <button onClick={onClickButtonGo}>Go</button>}
                     {showMore && <div>More</div>}
                     {showLess && <div>Less</div>}
-                    {showWin && countOfRound && <div>You win!</div>}
+                    {showWin && countOfRound && <div>{`You win! It was ${num}`}</div>}
                     {showLose && <div>{`Maybe next time! It was ${num}`}</div>}
                 </div>
             </div>
