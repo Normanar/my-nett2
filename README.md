@@ -13,8 +13,8 @@ You can see this project on Github pages: https://normanar.github.io/my-nett2
 ***
 
 Test account: 
-###email: free@samuraijs.com
-###password: free
+### email: free@samuraijs.com
+### password: free
 ***
 
 
