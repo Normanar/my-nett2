@@ -113,8 +113,6 @@ export function Game() {
                     {showLose && <div>{`Maybe next time! It was ${num}`}</div>}
                 </div>
             </div>
-            {console.log(round)}
-            {console.log(112121212121212121212)}
         </div>
     )
 }
