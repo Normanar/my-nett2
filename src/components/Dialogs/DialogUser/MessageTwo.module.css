@@ -1,0 +1,52 @@
+.message_two {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #BFBFBD;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.message_text_two {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.name_two {
+    color: #24272C;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.text_two {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.message_two_avatar::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 20px solid white;
+    border-bottom: 10px solid transparent;
+    top: 50px;
+    left: -20px;
+    z-index: 2;
+}
+
+.message_two_avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.message_two_avatar {
+    position: relative;
+}

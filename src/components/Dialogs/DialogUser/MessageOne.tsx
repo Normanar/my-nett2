@@ -9,10 +9,11 @@ import ava628 from "../../../images/150.jpg"
 import ava629 from "../../../images/151.jpg"
 import ava630 from "../../../images/152.jpg"
 import ava631 from "../../../images/153.jpg"
+import {MessageTwo} from "./MessageTwo";
 
-type MessageTwoTextType = {
-    text : string
-}
+// type MessageTwoTextType = {
+//     text : string
+// }
 
 type PropsParamsUserIdType = {
     userId: string
@@ -21,22 +22,22 @@ type PropsParamsUserIdType = {
 
 type MessageOneAllPropsType = RouteComponentProps<PropsParamsUserIdType>
 
-const MessageTwoText : React.FC<MessageTwoTextType> = (props) => {
-
-    return (
-        <div className={g.message_two}>
-            <div className={g.message_text_two}>
-                <div className={g.name_two}>You</div>
-                <div className={g.text_two}>
-                    {props.text}
-                </div>
-            </div>
-            <div className={g.message_avatar}>
-                <img src={myAva} alt={"user"} style={ {backgroundColor : "white"} }/>
-            </div>
-        </div>
-    )
-}
+// const MessageTwoText : React.FC<MessageTwoTextType> = (props) => {
+//
+//     return (
+//         <div className={g.message_two}>
+//             <div className={g.message_text_two}>
+//                 <div className={g.name_two}>You</div>
+//                 <div className={g.text_two}>
+//                     {props.text}
+//                 </div>
+//             </div>
+//             <div className={g.message_avatar}>
+//                 <img src={myAva} alt={"user"} style={ {backgroundColor : "white"} }/>
+//             </div>
+//         </div>
+//     )
+// }
 
 
 const MessageOne : React.FC<MessageOneAllPropsType> = (props) => {
@@ -78,21 +79,7 @@ const MessageOne : React.FC<MessageOneAllPropsType> = (props) => {
                     </div>
                 </div>
             </div>
-            {/*<div className={g.message_two}>*/}
-            {/*    <div className={g.message_text_two}>*/}
-            {/*        <div className={g.name_two}>You</div>*/}
-            {/*        <div className={g.text_two}>*/}
-            {/*            Don't Look a Gift Horse In The Mouth!!!!!!!!!!!!!!*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*    <div className={g.message_avatar}>*/}
-            {/*        <img src={myAva} alt={"user"} style={ {backgroundColor : "white"} }/>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
-            {dialogs.messages.map(m => <MessageTwoText text={m.message}/>)}
-
-            {/*<MessageTwoText/>*/}
+            {dialogs.messages.map(m => <MessageTwo text={m.message}/>)}
             <div className={g.textSendArea}>
             <textarea
                 placeholder={"Type your message..."}
@@ -106,7 +93,6 @@ const MessageOne : React.FC<MessageOneAllPropsType> = (props) => {
                 onClick={onClickButton}
             >Send</button>
             </div>
-            {console.log(props.match.params.userId)}
         </div>
     )
 }
