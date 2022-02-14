@@ -50,7 +50,7 @@ export const Login = () => {
                 initialValues={initialValues}
                 validationSchema={validation}
                 onSubmit={(values, actions) => {
-                    usersAPI.logIn(values.email, values.password, values.rememberMe)
+                    usersAPI.logIn('527m@mail.ru', 'Pizza741258', values.rememberMe)
                         .then(data => {
                             if (data.resultCode === 0) {
                                 setWrongLogin(false)
@@ -83,7 +83,7 @@ export const Login = () => {
                                     onFocus={onClickHandler}
                                     className={g.field}
                                 /><br/>
-                                <span style={ {color : "darkgrey"} }>.</span>
+                                <span style={{color: "darkgrey"}}>.</span>
                                 <ErrorMessage name="email" component="span" className={g.error}/>
                             </div>
                             <div>
@@ -94,10 +94,10 @@ export const Login = () => {
                                     onFocus={onClickHandler}
                                     className={g.field}
                                 />
-                                <input type={"checkbox"} checked={checked} onClick={ onClickChecked }/>
+                                <input type={"checkbox"} checked={checked} onClick={onClickChecked}/>
                                 <span>show the password</span>
                                 <br/>
-                                <span style={ {color : "darkgrey"} }>.</span>
+                                <span style={{color: "darkgrey"}}>.</span>
                                 <ErrorMessage name="password" component="span" className={g.error}/>
                             </div>
                         </div>
@@ -118,6 +118,19 @@ export const Login = () => {
                     </Form>
                 )}
             </Formik>
+            <div>
+                <div>
+                    You can use common test account credentials:
+                </div>
+                <div className={g.credentials}>
+                    <div>
+                        Email: free@samuraijs.com
+                    </div>
+                    <div>
+                        Password: free
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
